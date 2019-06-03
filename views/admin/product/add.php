@@ -92,59 +92,102 @@ require('views/admin/rightSide.php');
         margin-right: 4px;
     }
 
-    .chosen {
-        color: #761c19;
-    }
 </style>
+<?php
+$bookInfo = $data['bookInfo'];
+$edit = 0;
+if (isset($bookInfo['esm'])){
+    $edit = 1;
+}else
+?>
 <div class="leftSide sans font_gray">
     <div class="menuContent">
         <h2 class="font_gray">
-            افزودن محصول جدید
+
+            <?php
+            if ($edit == 0) {
+                ?>
+                افزودن محصول جدید
+                <?php
+            } elseif ($edit == 1) {
+                ?>
+                ویرایش محصول
+                <?php
+            }
+            ?>
+
         </h2>
         <hr>
-        <form action="adminproduct/addproduct" method="post">
+        <form action="adminproduct/addproduct/<?= @$bookInfo['id'] ?>" method="post">
             <div class="row">
                 <span class="title">
                     عنوان محصول:
                 </span>
-                <input type="text" name="title" value="" placeholder="نام محصول جدید را وارد کنید">
+                <input type="text" name="title" value="<?php if ($edit == 0) {
+                } else {
+                    echo $bookInfo['esm'];
+                } ?>"
+                       placeholder="نام محصول جدید را وارد کنید">
             </div>
             <div class="row">
                 <span class="title">
                     نام نویسنده:
                 </span>
-                <input type="text" name="nevisande" value="" placeholder="نام نویسنده را وارد کنید">
+                <input type="text" name="nevisande" value="<?php if ($edit == 0) {
+                } else {
+                    echo $bookInfo['nevisande'];
+                } ?>"
+                       placeholder="نام نویسنده را وارد کنید">
             </div>
             <div class="row">
                 <span class="title">
                     نام مترجم:
                 </span>
-                <input type="text" name="motarjem" value="" placeholder="نام مترجم را وارد کنید">
+                <input type="text" name="motarjem" value="<?php if ($edit == 0) {
+                } else {
+                    echo $bookInfo['motarjem'];
+                } ?>"
+                       placeholder="نام مترجم را وارد کنید">
             </div>
             <div class="row">
                 <span class="title">
                     قیمت:
                 </span>
-                <input type="text" name="gheymat" value="" placeholder="قیمت محصول جدید را وارد کنید">
+                <input type="text" name="gheymat" value="<?php if ($edit == 0) {
+                } else {
+                    echo $bookInfo['gheymat'];
+                } ?>"
+                       placeholder="قیمت محصول جدید را وارد کنید">
             </div>
             <div class="row">
                 <span class="title">
                     معرفی اجمالی:
                 </span>
-                <textarea rows="4" class="moarefi_area" type="text" name="moarefi" value=""
-                          placeholder="متنی به عنوان معرفی محصول جدید وارد کنید"></textarea>
+                <textarea rows="4" class="moarefi_area" type="text" name="moarefi"
+                          placeholder="متنی به عنوان معرفی محصول جدید وارد کنید"><?php if ($edit == 0) {
+                    } else {
+                        echo $bookInfo['moarefi'];
+                    } ?></textarea>
             </div>
             <div class="row">
                 <span class="title">
                     تعداد موجود:
                 </span>
-                <input type="text" name="tedad_mojud" value="" placeholder="تعداد محصول جدید را وارد کنید">
+                <input type="text" name="tedad_mojud" value="<?php if ($edit == 0) {
+                } else {
+                    echo $bookInfo['tedad_mojud'];
+                } ?>"
+                       placeholder="تعداد محصول جدید را وارد کنید">
             </div>
             <div class="row">
                 <span class="title">
                     میزان تخفیف (عدد مربوط به درصد تخفیف):
                 </span>
-                <input type="text" name="takhfif" value="" placeholder="عدد درصد تخفیف محصول جدید را وارد کنید">
+                <input type="text" name="takhfif" value="<?php if ($edit == 0) {
+                } else {
+                    echo $bookInfo['takhfif'];
+                } ?>"
+                       placeholder="عدد درصد تخفیف محصول جدید را وارد کنید">
             </div>
             <div class="row">
                 <span class="title">
@@ -157,8 +200,14 @@ require('views/admin/rightSide.php');
                     <?php
                     $entesharat = $data['entesharat'];
                     foreach ($entesharat as $row) {
+
                         ?>
-                        <option value="<?= $row['id'] ?>">
+                        <option value="<?= $row['id'] ?>" <?php if ($edit == 0) {
+                        } else {
+                            if ($bookInfo['identesharat'] == $row['id']) {
+                                echo 'selected';
+                            }
+                        } ?>>
                             <?= $row['nam'] ?>
                         </option>
                         <?php
@@ -187,7 +236,21 @@ require('views/admin/rightSide.php');
                     }
                     ?>
                 </select>
-
+                <?php
+                if ($edit == 0) {
+                } else {
+                    $allCatsInfo = $bookInfo['allCatsInfo'];
+                    foreach ($allCatsInfo as $catInfo) {
+                        ?>
+                        <span class="span_chosen_option">
+                        <input type="hidden" name="cat[]" value="<?= $catInfo['id'] ?>">
+                        <?= $catInfo['title'] ?>
+                        <i class="remove_icon" onclick="removeItem(this)"></i>
+                    </span>
+                        <?php
+                    }
+                }
+                ?>
             </div>
             <button type="submit" class="submitBtn sans">
                 ثبت
@@ -201,7 +264,6 @@ require('views/admin/rightSide.php');
                 var spanTag = '<span class="span_chosen_option"><input type="hidden" name="cat[]" value="' + catId + '">' + catName + '<i class="remove_icon" onclick="removeItem(this)"></i></span>';
                 var parentTag = optionTag.parents('.row');
                 parentTag.append(spanTag);
-                optionTag.remove();
             }
 
             function removeItem(tag) {

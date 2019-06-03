@@ -14,15 +14,16 @@ class Adminproduct extends Controller
         $this->view('admin/product/index', $data);
     }
 
-    function addproduct()
+    function addproduct($idbook='')
     {
         if (isset($_POST['title'])){
             //var_dump($_POST);
-            $this->model->addProduct($_POST);
+            $this->model->addProduct($_POST, $idbook);
         }
         $categories = $this->model->getCats();
         $entesharat = $this->model->getEntesharat();
-        $data = ['categories'=>$categories, 'entesharat'=>$entesharat];
+        $bookInfo = $this->model->getProductInfo($idbook);
+        $data = ['categories'=>$categories, 'entesharat'=>$entesharat, 'bookInfo'=>$bookInfo];
         $this->view('admin/product/add', $data);
     }
 }

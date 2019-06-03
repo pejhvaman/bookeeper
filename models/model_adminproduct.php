@@ -32,13 +32,15 @@ class model_adminproduct extends Model
         $res = $this->doSelect($sql);
         return $res;
     }
-    function getEntesharat(){
+
+    function getEntesharat()
+    {
         $sql = "select * from tbl_entesharat";
         $res = $this->doSelect($sql);
         return $res;
     }
 
-    function addProduct($data=[])
+    function addProduct($data = [], $idbook)
     {
         $title = $data['title'];
         $nevisande = $data['nevisande'];
@@ -48,11 +50,37 @@ class model_adminproduct extends Model
         $tedad_mojud = $data['tedad_mojud'];
         $takhfif = $data['takhfif'];
         $entesharat = $data['entesharat'];
-        $categories = $data['cat'];
-        $categories = join(',',$categories);
-        $sql = "insert into tbl_books (esm, nevisande, motarjem, gheymat, moarefi, tedad_mojud, takhfif, identesharat, idcategory) values (?,?,?,?,?,?,?,?,?)";
-        $values = [$title, $nevisande, $motarjem , $gheymat, $moarefi, $tedad_mojud, $takhfif, $entesharat, $categories];
-        $this->doQuery($sql,$values);
+
+        $categories = '';
+        if(isset($data['cat'])){
+            $categories = $data['cat'];
+            $categories = join(',', $categories);
+        }
+
+
+        if ($idbook == '') {
+            $sql = "insert into tbl_books (esm, nevisande, motarjem, gheymat, moarefi, tedad_mojud, takhfif, identesharat, idcategory) values (?,?,?,?,?,?,?,?,?)";
+            $values = [$title, $nevisande, $motarjem, $gheymat, $moarefi, $tedad_mojud, $takhfif, $entesharat, $categories];
+        } else {
+            $sql = "update tbl_books set esm=?, nevisande=?, motarjem=?, gheymat=?, moarefi=?, tedad_mojud=?, takhfif=?, identesharat=?, idcategory=? where id=?";
+            $values = [$title, $nevisande, $motarjem, $gheymat, $moarefi, $tedad_mojud, $takhfif, $entesharat, $categories, $idbook];
+        }
+        $this->doQuery($sql, $values);
     }
 
+    function getProductInfo($idbook){
+        $sql = "select * from tbl_books where id=?";
+        $bookInfo = $this->doSelect($sql, [$idbook], 1);
+        $idcategory = $bookInfo['idcategory'];
+        $idcategory = explode(',', $idcategory);
+        $idcategory = array_filter($idcategory);
+        $allCategoriesInfo = [];
+        foreach ($idcategory as $idcat){
+            $sql = "select * from tbl_category where id=?";
+            $categoryInfo = $this->doSelect($sql,[$idcat],1);
+            array_push($allCategoriesInfo, $categoryInfo);
+        }
+        $bookInfo['allCatsInfo'] = $allCategoriesInfo;
+        return $bookInfo;
+    }
 }

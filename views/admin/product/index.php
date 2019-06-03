@@ -185,7 +185,7 @@ $books = $data['books'];
                             ?>
                         </td>
                         <td class="edit">
-                            <a href="adminproduct/addproduct/<?= $book['id'] ?>/edit">
+                            <a href="adminproduct/addproduct/<?= $book['id'] ?>">
                                 <i class="editIcon"></i>
                             </a>
                         </td>
