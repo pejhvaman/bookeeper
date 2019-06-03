@@ -1,6 +1,7 @@
 <?php
 require('views/admin/rightSide.php');
 ?>
+<script src="public/ckeditor/ckeditor.js"></script>
 <style>
     .leftSide {
         width: 1020px;
@@ -163,7 +164,7 @@ if (isset($bookInfo['esm'])){
                 <span class="title">
                     معرفی اجمالی:
                 </span>
-                <textarea rows="4" class="moarefi_area" type="text" name="moarefi"
+                <textarea rows="4" class="moarefi_area editor1" id="editor1" type="text" name="moarefi"
                           placeholder="متنی به عنوان معرفی محصول جدید وارد کنید"><?php if ($edit == 0) {
                     } else {
                         echo $bookInfo['moarefi'];
@@ -271,6 +272,8 @@ if (isset($bookInfo['esm'])){
                 var spanItem = removeIcon.parents('.span_chosen_option');
                 spanItem.remove();
             }
+
+            CKEDITOR.replace('editor1', {language: 'fa'});
         </script>
     </div>
 </div>
