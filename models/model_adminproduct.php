@@ -17,7 +17,7 @@ class model_adminproduct extends Model
 
     function getBooks()
     {
-        $sql = "select * from tbl_books";
+        $sql = "select * from tbl_books order by id desc ";
         $result = $this->doSelect($sql);
         foreach ($result as $key => $row) {
             $total_price = $this->calculateDiscount($row['gheymat'], $row['takhfif'])[0];
@@ -52,7 +52,7 @@ class model_adminproduct extends Model
         $entesharat = $data['entesharat'];
 
         $categories = '';
-        if(isset($data['cat'])){
+        if (isset($data['cat'])) {
             $categories = $data['cat'];
             $categories = join(',', $categories);
         }
@@ -68,19 +68,28 @@ class model_adminproduct extends Model
         $this->doQuery($sql, $values);
     }
 
-    function getProductInfo($idbook){
+    function getProductInfo($idbook)
+    {
         $sql = "select * from tbl_books where id=?";
         $bookInfo = $this->doSelect($sql, [$idbook], 1);
         $idcategory = $bookInfo['idcategory'];
         $idcategory = explode(',', $idcategory);
         $idcategory = array_filter($idcategory);
         $allCategoriesInfo = [];
-        foreach ($idcategory as $idcat){
+        foreach ($idcategory as $idcat) {
             $sql = "select * from tbl_category where id=?";
-            $categoryInfo = $this->doSelect($sql,[$idcat],1);
+            $categoryInfo = $this->doSelect($sql, [$idcat], 1);
             array_push($allCategoriesInfo, $categoryInfo);
         }
         $bookInfo['allCatsInfo'] = $allCategoriesInfo;
         return $bookInfo;
+    }
+
+    function deleteProduct($ids = [])
+    {
+        //var_dump($ids);
+        $ids = join(',', $ids);
+        $sql = "delete from tbl_books where id in (" . $ids . ")";
+        $this->doQuery($sql);
     }
 }

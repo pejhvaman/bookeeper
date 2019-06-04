@@ -149,12 +149,14 @@ $books = $data['books'];
         <a onclick="submitForm();" class="deleteBtn">
             حذف
         </a>
-        <form action="admincategory/deleteproduct" method="post">
+        <form action="adminproduct/deleteproduct" method="post">
 
             <table class="menuTable sans font_gray" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>ردیف</td>
                     <td>عنوان</td>
+                    <td>نویسنده</td>
+                    <td>مترجم</td>
                     <td>قیمت</td>
                     <td>تخفیف</td>
                     <td>ویرایش</td>
@@ -176,6 +178,16 @@ $books = $data['books'];
                         </td>
                         <td>
                             <?php
+                            echo $book['nevisande'];
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            echo $book['motarjem'];
+                            ?>
+                        </td>
+                        <td>
+                            <?php
                             echo $book['gheymat'].'تومان';
                             ?>
                         </td>
@@ -190,7 +202,7 @@ $books = $data['books'];
                             </a>
                         </td>
                         <td class="selectTik">
-                            <input name="id[]" value="<?= $book['id'] ?>" type="checkbox">
+                            <input name="ids[]" value="<?= $book['id'] ?>" type="checkbox">
                         </td>
                     </tr>
                     <?php

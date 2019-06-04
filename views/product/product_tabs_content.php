@@ -16,7 +16,6 @@
     <section id="question_ask"></section>
     <?php
     $bookInfo = $data['bookInfo'];
-    $entesharats = $bookInfo['entesharats'];
     /*require ('property_tab.php');
     require ('comments_tab.php');
     require ('questions_tab.php');*/
