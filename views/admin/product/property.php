@@ -51,44 +51,6 @@ require('views/admin/rightSide.php');
         text-align: center;
     }
 
-    .checkBoxManual {
-        background: url(public/images/tikgray.png) no-repeat center;
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        position: absolute;
-        right: 40%;
-        transform: translate(-50%, -50%);
-        cursor: pointer;
-    }
-
-    .checkBoxManual:hover {
-        opacity: .6;
-    }
-
-    .selectCheck {
-        background: url(public/images/tikdone.png) no-repeat center;
-    }
-
-    .lookSub {
-        position: relative;
-    }
-
-    .lookSubIcon {
-        display: inline-block;
-        width: 32px;
-        height: 32px;
-        cursor: pointer;
-        background: url(public/images/look.png) no-repeat center;
-        right: 40%;
-        position: absolute;
-        transform: translate(-50%, -50%);
-    }
-
-    .lookSubIcon:hover {
-        opacity: .6;
-    }
-
     .addBtn, .deleteBtn {
         float: left;
         padding: 5px 15px;
@@ -134,62 +96,34 @@ require('views/admin/rightSide.php');
         opacity: .6;
     }
 
-    .dirIcon {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        background: url(public/images/chevron-sign-left.png) no-repeat center;
-    }
-
-    .pathLinks:visited {
-        color: unset;
-    }
-
-    .viewproperty {
-        display: block;
-        width: 24px;
-        height: 24px;
-        background: url(public/images/property.png) no-repeat center;
-        right: 35%;
-        position: absolute;
-        transform: translate(-50%, -50%);
-    }
-    .viewproperty:hover{
-        opacity: .6;
-    }
 </style>
 <?php
-$books = $data['books'];
+$property = $data['property'];
 ?>
 <div class="leftSide sans font_gray">
     <div class="menuContent">
         <h2 class="font_gray">
-            مدیریت محصولات
+            مدیریت مشخصات هر محصول
         </h2>
 
         <hr>
-        <a class="addBtn" href="adminproduct/addproduct">
+        <a class="addBtn" href="adminproduct/">
             افزودن
         </a>
         <a onclick="submitForm();" class="deleteBtn">
             حذف
         </a>
-        <form action="adminproduct/deleteproduct" method="post">
+        <form action="adminproduct/" method="post">
 
             <table class="menuTable sans font_gray" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>ردیف</td>
                     <td>عنوان</td>
-                    <td>نویسنده</td>
-                    <td>مترجم</td>
-                    <td>قیمت</td>
-                    <td>تخفیف</td>
-                    <td>مشخصات</td>
                     <td>ویرایش</td>
                     <td>انتخاب</td>
                 </tr>
                 <?php
-                foreach ($books as $key => $book) {
+                foreach ($property as $key => $row) {
                     ?>
                     <tr>
                         <td>
@@ -199,41 +133,16 @@ $books = $data['books'];
                         </td>
                         <td>
                             <?php
-                            echo $book['esm'];
-                            ?>
-                        </td>
-                        <td>
-                            <?php
-                            echo $book['nevisande'];
-                            ?>
-                        </td>
-                        <td>
-                            <?php
-                            echo $book['motarjem'];
-                            ?>
-                        </td>
-                        <td>
-                            <?php
-                            echo $book['gheymat'] . 'تومان';
-                            ?>
-                        </td>
-                        <td>
-                            <?php
-                            echo $book['discount_price'] . "تومان";
+                            echo $row['title'];
                             ?>
                         </td>
                         <td class="tdvaled">
-                            <a href="adminproduct/property/<?php echo $book['id']; ?>">
-                                <i class="viewproperty"></i>
-                            </a>
-                        </td>
-                        <td class="tdvaled">
-                            <a href="adminproduct/addproduct/<?= $book['id'] ?>">
+                            <a href="adminproduct/">
                                 <i class="editIcon"></i>
                             </a>
                         </td>
                         <td class="selectTik">
-                            <input name="ids[]" value="<?= $book['id'] ?>" type="checkbox">
+                            <input name="ids[]" value="<?= $row['id'] ?>" type="checkbox">
                         </td>
                     </tr>
                     <?php

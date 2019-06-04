@@ -20,8 +20,8 @@ class model_adminproduct extends Model
         $sql = "select * from tbl_books order by id desc ";
         $result = $this->doSelect($sql);
         foreach ($result as $key => $row) {
-            $total_price = $this->calculateDiscount($row['gheymat'], $row['takhfif'])[0];
-            $result[$key]['total_price'] = $total_price;
+            $discount_price = $this->calculateDiscount($row['gheymat'], $row['takhfif'])[0];
+            $result[$key]['discount_price'] = $discount_price;
         }
         return $result;
     }
@@ -91,5 +91,10 @@ class model_adminproduct extends Model
         $ids = join(',', $ids);
         $sql = "delete from tbl_books where id in (" . $ids . ")";
         $this->doQuery($sql);
+    }
+    function getProperty($idbook){
+        $sql = "select * from tbl_property where idbook=?";
+        $propertyInfo = $this->doSelect($sql, [$idbook]);
+        return $propertyInfo;
     }
 }

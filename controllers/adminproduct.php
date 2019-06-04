@@ -31,6 +31,12 @@ class Adminproduct extends Controller
     {
         $ids = $_POST['ids'];
         $this->model->deleteProduct($ids);
-        //header('location:' . URL . 'adminproduct');
+        header('location:' . URL . 'adminproduct');
+    }
+    function property($idbook)
+    {
+        $propertyInfo = $this->model->getProperty($idbook);
+        $data = ['property'=>$propertyInfo];
+        $this->view('admin/product/property', $data);
     }
 }

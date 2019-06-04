@@ -316,7 +316,7 @@
 
         <div id="header_top_right">
             <div id="logo">
-                <span id="logo_span"></span>
+                <a href="<?= URL ?>" id="logo_span"></a>
             </div>
             <div id="search">
                 <input id="search_input" placeholder="نام کتاب، ناشر یا دسته ی مورد نظر خود را وارد کنید...">
