@@ -105,6 +105,10 @@ class model_adminproduct extends Model
         $ids = join(',', $ids);
         $sql = "delete from tbl_books where id in (" . $ids . ")";
         $this->doQuery($sql);
+        //in raveshe neveshtane querye delete behine tar az foreach ast...
+        $sql = "delete from tbl_property where idbook in (" . $ids . ")";
+        $this->doQuery($sql);
+
     }
 
     function getProperty($idbook)
