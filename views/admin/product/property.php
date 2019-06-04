@@ -125,7 +125,7 @@ $bookInfo = $data['bookInfo'];
         <a onclick="submitForm();" class="deleteBtn">
             حذف
         </a>
-        <form action="adminproduct/" method="post">
+        <form action="adminproduct/deleteproperty/<?php echo $bookInfo['id'] ?>" method="post">
 
             <table class="menuTable sans font_gray" cellpadding="0" cellspacing="0">
                 <tr>

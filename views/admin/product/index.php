@@ -168,7 +168,7 @@ $books = $data['books'];
         </h2>
 
         <hr>
-        <a class="addBtn" href="adminproduct/addproduct">
+        <a class="addBtn" href="adminproduct/addproduct/">
             افزودن
         </a>
         <a onclick="submitForm();" class="deleteBtn">

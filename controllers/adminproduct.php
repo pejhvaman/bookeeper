@@ -38,27 +38,33 @@ class Adminproduct extends Controller
     {
         $propertyInfo = $this->model->getProperty($idbook);
         $bookInfo = $this->model->getProductInfo($idbook);
-        $data = ['property' => $propertyInfo, 'bookInfo'=>$bookInfo];
+        $data = ['property' => $propertyInfo, 'bookInfo' => $bookInfo];
         $this->view('admin/product/property', $data);
     }
 
-    function addproperty($idbook, $idproperty='')
+    function addproperty($idbook, $idproperty = '')
     {
         //we use of this page(addproperty) for edit each property, so we need that property to edit(level-3)
         $propertyInfo = $this->model->getPropertyInfo($idproperty);
 
 
         //this is for add a new property(level-2)
-        if (isset($_POST['title'])){
+        if (isset($_POST['title'])) {
             $this->model->addProperty($_POST, $idbook, $idproperty);
-            header('location:'.URL.'adminproduct/property/'.$idbook);
+            header('location:' . URL . 'adminproduct/property/' . $idbook);
         }
 
         //this is for information that we need in addproperty page(level-1)
         $bookInfo = $this->model->getProductInfo($idbook);
-        $data = ['bookInfo'=>$bookInfo, 'propertyInfo'=>$propertyInfo];
+        $data = ['bookInfo' => $bookInfo, 'propertyInfo' => $propertyInfo];
         $this->view('admin/product/addproperty', $data);
+    }
 
+    function deleteproperty($idbook)
+    {
+        $ids = $_POST['ids'];
+        $this->model->deleteProperty($ids);
+        header('location:'.URL.'adminproduct/property/'.$idbook);
 
     }
 }

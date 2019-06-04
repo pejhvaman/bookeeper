@@ -28,7 +28,7 @@ class model_adminproduct extends Model
 
     function getCats()  //this func is for get all categories for use in admin/category/add.php
     {
-        $sql = "select * from tbl_category";
+        $sql = "select * from tbl_category where valed!=0";
         $res = $this->doSelect($sql);
         return $res;
     }
@@ -82,10 +82,12 @@ class model_adminproduct extends Model
             array_push($allCategoriesInfo, $categoryInfo);
         }
         $bookInfo['allCatsInfo'] = $allCategoriesInfo;
+        if (isset($bookInfo['identesharat'])) {
+            $identesharat = $bookInfo['identesharat'];
+            $entInfo = $this->getEntInfo($identesharat);
+            $bookInfo['entesharat'] = $entInfo;
+        }
 
-        $identesharat = $bookInfo['identesharat'];
-        $entInfo = $this->getEntInfo($identesharat);
-        $bookInfo['entesharat'] = $entInfo;
 
         return $bookInfo;
     }
@@ -117,11 +119,11 @@ class model_adminproduct extends Model
     {
         $title = $data['title'];
         $tozihat = $data['tozihat'];
-        if($idproperty==''){
+        if ($idproperty == '') {
             $sql = "insert into tbl_property (title, tozihat, idbook) values (?, ? ,?)";
             $values = [$title, $tozihat, $idbook];
-        }else{
-            $sql= "update tbl_property set title=?, tozihat=? where id=?";
+        } else {
+            $sql = "update tbl_property set title=?, tozihat=? where id=?";
             $values = [$title, $tozihat, $idproperty];
         }
         $this->doQuery($sql, $values);
@@ -130,7 +132,14 @@ class model_adminproduct extends Model
     function getPropertyInfo($id)
     {
         $sql = "select * from tbl_property where id=?";
-        $res = $this->doSelect($sql, [$id],1);
+        $res = $this->doSelect($sql, [$id], 1);
         return $res;
+    }
+
+    function deleteProperty($ids = [])
+    {
+        $ids = join(',', $ids);
+        $sql = "delete from tbl_property where id in (" . $ids . ")";
+        $this->doQuery($sql);
     }
 }
