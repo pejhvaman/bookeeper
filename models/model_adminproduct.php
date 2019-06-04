@@ -82,7 +82,19 @@ class model_adminproduct extends Model
             array_push($allCategoriesInfo, $categoryInfo);
         }
         $bookInfo['allCatsInfo'] = $allCategoriesInfo;
+
+        $identesharat = $bookInfo['identesharat'];
+        $entInfo = $this->getEntInfo($identesharat);
+        $bookInfo['entesharat'] = $entInfo;
+
         return $bookInfo;
+    }
+
+    function getEntInfo($ident)
+    {
+        $sql = "select * from tbl_entesharat where id=?";
+        $entInfo = $this->doSelect($sql, [$ident], 1);
+        return $entInfo['nam'];
     }
 
     function deleteProduct($ids = [])
@@ -92,9 +104,21 @@ class model_adminproduct extends Model
         $sql = "delete from tbl_books where id in (" . $ids . ")";
         $this->doQuery($sql);
     }
-    function getProperty($idbook){
-        $sql = "select * from tbl_property where idbook=?";
+
+    function getProperty($idbook)
+    {
+        $sql = "select * from tbl_property where idbook=? order by id desc ";
         $propertyInfo = $this->doSelect($sql, [$idbook]);
+        //print_r($propertyInfo);
         return $propertyInfo;
+    }
+
+    function addProperty($data = [], $idbook)
+    {
+        $title = $data['title'];
+        $tozihat = $data['tozihat'];
+        $sql = "insert into tbl_property (title, tozihat, idbook) values (?, ? ,?)";
+        $values = [$title, $tozihat, $idbook];
+        $this->doQuery($sql, $values);
     }
 }

@@ -33,10 +33,26 @@ class Adminproduct extends Controller
         $this->model->deleteProduct($ids);
         header('location:' . URL . 'adminproduct');
     }
+
     function property($idbook)
     {
         $propertyInfo = $this->model->getProperty($idbook);
-        $data = ['property'=>$propertyInfo];
+        $bookInfo = $this->model->getProductInfo($idbook);
+        $data = ['property' => $propertyInfo, 'bookInfo'=>$bookInfo];
         $this->view('admin/product/property', $data);
+    }
+
+    function addproperty($idbook)
+    {
+        if (isset($_POST['title'])){
+            $this->model->addProperty($_POST, $idbook);
+            header('location:'.URL.'adminproduct/property/'.$idbook);
+        }
+        //
+        $bookInfo = $this->model->getProductInfo($idbook);
+        $data = ['bookInfo'=>$bookInfo];
+        $this->view('admin/product/addproperty', $data);
+
+
     }
 }

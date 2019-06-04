@@ -99,15 +99,27 @@ require('views/admin/rightSide.php');
 </style>
 <?php
 $property = $data['property'];
+$bookInfo = $data['bookInfo'];
 ?>
 <div class="leftSide sans font_gray">
     <div class="menuContent">
         <h2 class="font_gray">
-            مدیریت مشخصات هر محصول
+            مدیریت مشخصات کتاب
+            <?php
+            echo $bookInfo['esm'];
+            ?>
+            به ترجمه ی
+            <?php
+            echo $bookInfo['motarjem'];
+            ?>
+            از انتشارات
+            <?php
+            echo $bookInfo['entesharat'];
+            ?>
         </h2>
 
         <hr>
-        <a class="addBtn" href="adminproduct/">
+        <a class="addBtn" href="adminproduct/addproperty/<?php echo $bookInfo['id'] ?>">
             افزودن
         </a>
         <a onclick="submitForm();" class="deleteBtn">
