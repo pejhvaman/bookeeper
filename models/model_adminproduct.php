@@ -113,12 +113,24 @@ class model_adminproduct extends Model
         return $propertyInfo;
     }
 
-    function addProperty($data = [], $idbook)
+    function addProperty($data = [], $idbook, $idproperty)
     {
         $title = $data['title'];
         $tozihat = $data['tozihat'];
-        $sql = "insert into tbl_property (title, tozihat, idbook) values (?, ? ,?)";
-        $values = [$title, $tozihat, $idbook];
+        if($idproperty==''){
+            $sql = "insert into tbl_property (title, tozihat, idbook) values (?, ? ,?)";
+            $values = [$title, $tozihat, $idbook];
+        }else{
+            $sql= "update tbl_property set title=?, tozihat=? where id=?";
+            $values = [$title, $tozihat, $idproperty];
+        }
         $this->doQuery($sql, $values);
+    }
+
+    function getPropertyInfo($id)
+    {
+        $sql = "select * from tbl_property where id=?";
+        $res = $this->doSelect($sql, [$id],1);
+        return $res;
     }
 }

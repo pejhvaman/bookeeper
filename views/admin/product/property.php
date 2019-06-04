@@ -149,7 +149,7 @@ $bookInfo = $data['bookInfo'];
                             ?>
                         </td>
                         <td class="tdvaled">
-                            <a href="adminproduct/">
+                            <a href="adminproduct/addproperty/<?= $row['idbook'] ?>/<?= $row['id'] ?>">
                                 <i class="editIcon"></i>
                             </a>
                         </td>

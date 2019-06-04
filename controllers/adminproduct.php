@@ -42,15 +42,21 @@ class Adminproduct extends Controller
         $this->view('admin/product/property', $data);
     }
 
-    function addproperty($idbook)
+    function addproperty($idbook, $idproperty='')
     {
+        //we use of this page(addproperty) for edit each property, so we need that property to edit(level-3)
+        $propertyInfo = $this->model->getPropertyInfo($idproperty);
+
+
+        //this is for add a new property(level-2)
         if (isset($_POST['title'])){
-            $this->model->addProperty($_POST, $idbook);
+            $this->model->addProperty($_POST, $idbook, $idproperty);
             header('location:'.URL.'adminproduct/property/'.$idbook);
         }
-        //
+
+        //this is for information that we need in addproperty page(level-1)
         $bookInfo = $this->model->getProductInfo($idbook);
-        $data = ['bookInfo'=>$bookInfo];
+        $data = ['bookInfo'=>$bookInfo, 'propertyInfo'=>$propertyInfo];
         $this->view('admin/product/addproperty', $data);
 
 

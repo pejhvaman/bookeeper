@@ -57,50 +57,66 @@ require('views/admin/rightSide.php');
         opacity: .7;
     }
 
-   /* .moarefi_area {
-        width: 40%;
-        padding: 10px;
-        border: 1px solid #e3e3e3;
-        border-radius: 4px;
-        font-family: sans;
-        color: #6f6f6f;
-        resize: none;
-    }*/
+    /* .moarefi_area {
+         width: 40%;
+         padding: 10px;
+         border: 1px solid #e3e3e3;
+         border-radius: 4px;
+         font-family: sans;
+         color: #6f6f6f;
+         resize: none;
+     }*/
 
 </style>
 <?php
 $bookInfo = $data['bookInfo'];
+$propertyInfo = $data['propertyInfo'];
+$edit = 0;
+if (isset($propertyInfo['title'])) {
+    $edit = 1;
+}
 ?>
 <div class="leftSide sans font_gray">
     <div class="menuContent">
         <h2 class="font_gray">
-            افزودن مشخصه جدید برای کتاب
             <?php
-            echo $bookInfo['esm'];
-            ?>
-            به ترجمه ی
-            <?php
-            echo $bookInfo['motarjem'];
-            ?>
-            از انتشارات
-            <?php
-            echo $bookInfo['entesharat'];
+            if ($edit == 0) {
+                ?>
+                افزودن مشخصه جدید برای کتاب
+                <?php
+                echo $bookInfo['esm'];
+                ?>
+                به ترجمه ی
+                <?php
+                echo $bookInfo['motarjem'];
+                ?>
+                از انتشارات
+                <?php
+                echo $bookInfo['entesharat'];
+            }else {
+                ?>
+                ویرایش مشخصه ی
+                <?php
+                echo $propertyInfo['title'];
+            }
             ?>
         </h2>
         <hr>
-        <form action="adminproduct/addproperty/<?php echo $bookInfo['id'] ?>" method="post">
+        <form action="adminproduct/addproperty/<?= $bookInfo['id'] ?>/<?= @$propertyInfo['id'] ?>" method="post">
             <div class="row">
                 <span class="title">
                     عنوان مشخصه:
                 </span>
-                <input type="text" name="title" value=""
+                <input type="text" name="title" value="<?= @$propertyInfo['title'] ?>"
                        placeholder="نام مشخصه را وارد کنید">
             </div>
             <div class="row">
                 <span class="title">
                     توضیحات مشخصه:
                 </span>
-                <textarea rows="4" class="editor1" id="editor1" name="tozihat"></textarea>
+                <textarea rows="4" class="editor1" id="editor1" name="tozihat">
+                    <?= @$propertyInfo['tozihat'] ?>
+                </textarea>
             </div>
             <div class="row">
                 <button type="submit" class="submitBtn sans">
