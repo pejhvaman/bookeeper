@@ -119,7 +119,7 @@ if (isset($bookInfo['esm'])){
 
         </h2>
         <hr>
-        <form action="adminproduct/addproduct/<?= @$bookInfo['id'] ?>" method="post">
+        <form action="adminproduct/addproduct/<?= @$bookInfo['id'] ?>" enctype="multipart/form-data" method="post">
             <div class="row">
                 <span class="title">
                     عنوان محصول:
@@ -149,6 +149,12 @@ if (isset($bookInfo['esm'])){
                     echo $bookInfo['motarjem'];
                 } ?>"
                        placeholder="نام مترجم را وارد کنید">
+            </div>
+            <div class="row">
+                <span class="title">
+                    تصویر را انتخاب کنید:
+                </span>
+                <input type="file" name="ax">
             </div>
             <div class="row">
                 <span class="title">

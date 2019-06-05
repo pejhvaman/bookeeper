@@ -29,6 +29,7 @@ class Model
         }
         return $result;
     }
+
     function doQuery($sql, $values = [])
     {
         $stmt = self::$conn->prepare($sql);
@@ -56,5 +57,67 @@ class Model
         $discount_price = ($price * $discount) / 100;
         $price_total = $price - $discount_price;
         return [$discount_price, $price_total];
+    }
+
+    function create_thumbnail($file, $pathToSave = '', $w, $h = '', $crop = FALSE)
+    {
+        $new_height = $h;
+        list($width, $height) = getimagesize($file);
+        $r = $width / $height;
+        if ($crop) {
+            if ($width > $height) {
+                $width = ceil($width - ($width * abs($r - $w / $h)));
+            } else {
+                $height = ceil($height - ($height * abs($r - $w / $h)));
+            }
+            $newwidth = $w;
+            $newheight = $h;
+        } else {
+            if ($w / $h > $r) {
+                $newwidth = $h * $r;
+                $newheight = $h;
+            } else {
+                $newheight = $w / $r;
+                $newwidth = $w;
+            }
+        }
+        $what = getimagesize($file);
+        switch (strtolower($what['mime'])) {
+            case 'image/png':
+                $src = imagecreatefrompng($file);
+                break;
+            case 'image/jpeg':
+                $src = imagecreatefromjpeg($file);
+                break;
+            case 'image/gif':
+                $src = imagecreatefromgif($file);
+                break;
+            default:
+                //die();
+        }
+        if ($new_height != ''){
+            $newheight = $new_height;
+        }
+        $dst = imagecreatetruecolor($newwidth, $newheight);
+        imagecopyresampled($dst, $src,0,0,0,0,$newwidth, $newheight, $width, $height);
+        imagejpeg($dst, $pathToSave, 95);
+        return $dst;
+    }
+    function delete_directory($dirname) {
+        if (is_dir($dirname))
+            $dir_handle = opendir($dirname);
+        if (!$dir_handle)
+            return false;
+        while($file = readdir($dir_handle)) {
+            if ($file != "." && $file != "..") {
+                if (!is_dir($dirname."/".$file))
+                    unlink($dirname."/".$file);
+                else
+                    delete_directory($dirname.'/'.$file);
+            }
+        }
+        closedir($dir_handle);
+        rmdir($dirname);
+        return true;
     }
 }

@@ -17,8 +17,8 @@ class Adminproduct extends Controller
     function addproduct($idbook = '')
     {
         if (isset($_POST['title'])) {
-            //var_dump($_POST);
-            $this->model->addProduct($_POST, $idbook);
+            //var_dump($_FILES);
+            $this->model->addProduct($_POST, $idbook, $_FILES['ax']);
         }
         $categories = $this->model->getCats();
         $entesharat = $this->model->getEntesharat();

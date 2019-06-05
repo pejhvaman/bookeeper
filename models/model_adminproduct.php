@@ -40,8 +40,9 @@ class model_adminproduct extends Model
         return $res;
     }
 
-    function addProduct($data = [], $idbook)
+    function addProduct($data = [], $idbook, $file=[])
     {
+        //var_dump($file);
         $title = $data['title'];
         $nevisande = $data['nevisande'];
         $motarjem = $data['motarjem'];
@@ -61,11 +62,44 @@ class model_adminproduct extends Model
         if ($idbook == '') {
             $sql = "insert into tbl_books (esm, nevisande, motarjem, gheymat, moarefi, tedad_mojud, takhfif, identesharat, idcategory) values (?,?,?,?,?,?,?,?,?)";
             $values = [$title, $nevisande, $motarjem, $gheymat, $moarefi, $tedad_mojud, $takhfif, $entesharat, $categories];
+            $this->doQuery($sql, $values);
+            $idbook = parent::$conn->lastInsertId();
+            mkdir('public/images/books/'.$idbook);
         } else {
             $sql = "update tbl_books set esm=?, nevisande=?, motarjem=?, gheymat=?, moarefi=?, tedad_mojud=?, takhfif=?, identesharat=?, idcategory=? where id=?";
             $values = [$title, $nevisande, $motarjem, $gheymat, $moarefi, $tedad_mojud, $takhfif, $entesharat, $categories, $idbook];
+            $this->doQuery($sql, $values);
         }
-        $this->doQuery($sql, $values);
+
+
+        //upload file:
+        //var_dump($file);
+        $fileName = $file['name'];
+        $fileType = $file['type'];
+        $fileTmp = $file['tmp_name'];
+        $fileError = $file['error'];
+        $fileSize = $file['size'];
+
+        $uploadOk = 1;
+        if ($fileType != 'image/jpg' and $fileType != 'image/jpeg' and $fileType!='image/png') {
+            $uploadOk = 0;
+        }
+        if ($fileSize > 5242880) {
+            $uploadOk = 0;
+        }
+        $targetMain = 'public/images/books/'.$idbook.'/';
+        $newName = 'book';
+        if ($uploadOk == 1) {
+            $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+            $target = $targetMain . $newName . '.' . $ext;
+            move_uploaded_file($fileTmp, $target);
+
+            $target250 = $targetMain.$newName.'_250.'.$ext;
+            $this->create_thumbnail($target, $target250, 250, 350);
+            $target100 = $targetMain.$newName.'_100.'.$ext;
+            $this->create_thumbnail($target, $target100, 100, 150);
+        }
+
     }
 
     function getProductInfo($idbook)
@@ -108,6 +142,14 @@ class model_adminproduct extends Model
         //in raveshe neveshtane querye delete behine tar az foreach ast...
         $sql = "delete from tbl_property where idbook in (" . $ids . ")";
         $this->doQuery($sql);
+
+
+        $path = 'public/images/books/';
+        $ids = explode(',', $ids);
+        foreach ($ids as $id){
+            $pathToDelete = $path.$id.'/';
+            parent::delete_directory($pathToDelete);
+        }
 
     }
 
