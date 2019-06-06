@@ -120,4 +120,20 @@ class Model
         rmdir($dirname);
         return true;
     }
+    public static function sessionInit()
+    {
+        session_start();
+    }
+    public static function sessionSet($name, $value)
+    {
+        $_SESSION[$name]= $value;
+    }
+    public static function sessionGet($name)
+    {
+        if(isset($_SESSION[$name])){
+            return $_SESSION[$name];
+        }else{
+            return false;
+        }
+    }
 }

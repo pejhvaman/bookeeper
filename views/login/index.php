@@ -11,7 +11,7 @@
 
     @font-face {
         font-family: 'sans';
-        src: url("public/font/IRANsansWeb.ttf") format('truetype'), url('public/font/IRANsansWeb.eot?#iefix') format('embedded-opentype');
+        src: url("public/font/Yekan.ttf") format('truetype'), url('public/font/Yekan.eot?#iefix') format('embedded-opentype');
     }
 
     div, a, p, span, ul, li {
@@ -203,52 +203,57 @@
         font-size: 14pt;
     }
 </style>
-<div id="reg_win">
-    <div class="title_div">
-        <p class="title">
-            ورود به پژوابوک
-        </p>
-    </div>
-    <div class="emialOrTel">
-        <label>
-            ایمیل یا شماره موبایل
-        </label>
-        <input placeholder="پست الکترونیک یا شماره موبایل خود را وارد نمایید" type="text">
-        <i class="email_icon" style="background: url(public/images/avatar.png) no-repeat center;"></i>
-    </div>
-    <div class="emialOrTel">
-        <label>
-            رمز عبور
-        </label>
-        <input type="password">
-        <i class="email_icon" style="background: url(public/images/password.png) no-repeat center;"></i>
-    </div>
-    <div id="emialOrTel" style="height: 105px">
-        <span class="btnMain">
+<form action="login/checkuser" method="post">
+    <div id="reg_win">
+        <div class="title_div">
+            <p class="title">
+                ورود به پژوابوک
+            </p>
+        </div>
+        <div class="emialOrTel">
+            <label>
+                ایمیل
+            </label>
+            <input name="email" placeholder="پست الکترونیک یا شماره موبایل خود را وارد نمایید" type="text">
+            <i class="email_icon" style="background: url(public/images/avatar.png) no-repeat center;"></i>
+        </div>
+        <div class="emialOrTel">
+            <label>
+                رمز عبور
+            </label>
+            <input name="ramz" type="password">
+            <i class="email_icon" style="background: url(public/images/password.png) no-repeat center;"></i>
+        </div>
+        <div id="emialOrTel" style="height: 105px">
+        <span onclick="submitLoginForm()" class="btnMain">
             ورود به پژوابوک
         </span>
-        <input class="real_checkbox" type="checkbox">
-        <span id="instead_check"></span>
-        <p>
-            مرا به خاطر داشته باش
-        </p>
-    </div>
-    <div id="newyou">
-        <p>
-            کاربر جدید هستید؟
-        </p>
-        <a>
-            ثبت نام در پژوابوک
-        </a>
-    </div>
+            <input class="real_checkbox" type="checkbox">
+            <span id="instead_check"></span>
+            <p>
+                مرا به خاطر داشته باش
+            </p>
+        </div>
+        <div id="newyou">
+            <p>
+                کاربر جدید هستید؟
+            </p>
+            <a>
+                ثبت نام در پژوابوک
+            </a>
+        </div>
 
-</div>
+    </div>
+</form>
 <script>
+    function submitLoginForm() {
+        $('form').submit();
+    }
+
     $('.real_checkbox').click(function () {
         if ($(this).is(':checked')) {
             $(this).parents('#emialOrTel').find('#instead_check').addClass('checked');
-        }
-        else {
+        } else {
             $(this).parents('#emialOrTel').find('#instead_check').removeClass('checked');
         }
     });

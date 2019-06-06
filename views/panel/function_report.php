@@ -1,69 +1,62 @@
 <div class="data_box1">
     <div class="data_title">
-        اطلاعات کاربری
+        گزارش عملکرد
     </div>
     <div class="data_box">
         <table cellspacing="0" cellpadding="0">
             <tr>
                 <td>
                         <span class="title_data">
-                            نام و نام خانوادگی:
+تعداد کل سفارشات:
                         </span>
                     <span class="value_data">
-                            پژمان یزدان خواه
+a
                         </span>
                 </td>
                 <td>
                         <span class="title_data">
-ایمیل:
+                            تعداد نظرات ارسال شده:
                         </span>
                     <span class="value_data">
-                    pejhman@gmail.com
+                            b
                     </span>
                 </td>
                 <td>
                         <span class="title_data">
-کد ملی:
+                            سفارشات در انتظار تایید:
                         </span>
                     <span class="value_data">
-12345678889
-                    </span>
+                            c
+                        </span>
                 </td>
             </tr>
             <tr>
                 <td>
                         <span class="title_data">
-شماره تلفن ثابت:
+سفارشات در حال پردازش:
                         </span>
                     <span class="value_data">
-021000000025
-                    </span>
+d
+                        </span>
                 </td>
                 <td>
                         <span class="title_data">
-شماره تلفن  همراه:
+تعداد پیغام های خوانده نشده:
                         </span>
                     <span class="value_data">
-093855557777
-                    </span>
+e
+                        </span>
                 </td>
                 <td>
                         <span class="title_data">
-تاریخ تولد:
+                            سفارشات ارسال شده:
                         </span>
                     <span class="value_data">
-1375/10/21
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" style="height: 70px">
-                        <span class="addBtn"
-                              style="width: 110px;height: 36px;line-height: 36px;margin: auto;font-size: 11.5pt">
-                            ویرایش اطلاعات
+f
                         </span>
                 </td>
             </tr>
+
         </table>
 
     </div>
