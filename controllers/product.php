@@ -54,5 +54,9 @@ class product extends Controller
         $dislikeCount = $_POST['dislikeCount'];
         $this->model->updateDisLikeCount($hasClass, $idbook, $dislikeCount);
     }
+    function addtobasket($idbook)
+    {
+        $this->model->addToBasket($idbook);
+    }
 
 }

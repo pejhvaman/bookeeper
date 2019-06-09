@@ -95,45 +95,65 @@ class Model
             default:
                 //die();
         }
-        if ($new_height != ''){
+        if ($new_height != '') {
             $newheight = $new_height;
         }
         $dst = imagecreatetruecolor($newwidth, $newheight);
-        imagecopyresampled($dst, $src,0,0,0,0,$newwidth, $newheight, $width, $height);
+        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
         imagejpeg($dst, $pathToSave, 95);
         return $dst;
     }
-    function delete_directory($dirname) {
+
+    function delete_directory($dirname)
+    {
         if (is_dir($dirname))
             $dir_handle = opendir($dirname);
         if (!$dir_handle)
             return false;
-        while($file = readdir($dir_handle)) {
+        while ($file = readdir($dir_handle)) {
             if ($file != "." && $file != "..") {
-                if (!is_dir($dirname."/".$file))
-                    unlink($dirname."/".$file);
+                if (!is_dir($dirname . "/" . $file))
+                    unlink($dirname . "/" . $file);
                 else
-                    delete_directory($dirname.'/'.$file);
+                    delete_directory($dirname . '/' . $file);
             }
         }
         closedir($dir_handle);
         rmdir($dirname);
         return true;
     }
+
     public static function sessionInit()
     {
         session_start();
     }
+
     public static function sessionSet($name, $value)
     {
-        $_SESSION[$name]= $value;
+        $_SESSION[$name] = $value;
     }
+
     public static function sessionGet($name)
     {
-        if(isset($_SESSION[$name])){
+        if (isset($_SESSION[$name])) {
             return $_SESSION[$name];
-        }else{
+        } else {
             return false;
         }
     }
+
+    public static function getBasketCookie()
+    {
+        if (isset($_COOKIE['basket'])) {
+            $cookie = $_COOKIE['basket'];
+        } else {
+            $expire = time() + 7 * 24 * 3600;
+            $value = time();
+            setcookie('basket', $value, $expire, '/');
+            $cookie = $value;
+        }
+        return $cookie;
+    }
+
+
 }

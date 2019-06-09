@@ -313,12 +313,20 @@ $bookCats = $bookinfo['bookCats'];
                     </span>
             </div>
         </div>
-        <span class="btnMain">
+        <span class="btnMain" onclick="addToBasket()">
                 اضافه کردن به سبد خرید
             </span>
     </div>
 </div>
 <script>
+    function addToBasket()
+    {
+        var url = '<?= URL ?>/product/addtobasket/<?= $bookinfo['id'] ?>';
+        var data = {};
+        $.post(url, data, function (msg) {
+            alert(msg);
+        });
+    }
     $('.choose_option').click(function () {
         $(this).find('.nashers').slideToggle(100);
     });

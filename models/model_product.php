@@ -152,4 +152,13 @@ class model_product extends Model
         $stmt->bindValue(1, $idbook);
         $stmt->execute();
     }
+
+    function addToBasket($idbook)
+    {
+        $cookie = self::getBasketCookie();
+        $param = [$cookie, $idbook];
+        $sql = "insert into tbl_basket (cookie, idbook) values (?, ?)";
+        $this->doQuery($sql,$param);
+
+    }
 }
