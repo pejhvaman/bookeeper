@@ -9,6 +9,10 @@ class showcart extends Controller
 
     function index()
     {
-        $this->view('showcart/index');
+        $basket = $this->model->getBasket();
+        $data = ['basket' => $basket];
+        $this->view('showcart/index', $data);
     }
+
+
 }

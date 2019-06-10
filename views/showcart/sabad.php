@@ -138,78 +138,86 @@
 </div>
 <div id="sabad">
     <table cellspacing="0" cellpadding="0">
-        <tr>
-            <td>
-                <span class="delete_prod"></span>
-            </td>
-            <td style="width: 380px">
-                <div class="right_img">
-                    <img src="public/images/taun1.jpg">
-                </div>
-                <div class="left_title">
-                    <p>
-                        نام کتاب
-                    </p>
-                    <p>
-                        نویسنده
-                    </p>
-                    <p>
-                        انتشارات
-                    </p>
-                </div>
-            </td>
-            <td>
-                <div class="choose_option">
+        <?php
+        $products = $data['basket'];
+        foreach ($products as $product) {
+            ?>
+            <tr>
+                <td>
+                    <span class="delete_prod"></span>
+                </td>
+                <td style="width: 380px">
+                    <div class="right_img">
+                        <img src="public/images/books/<?= $product['id'] ?>/book_100.jpg">
+                    </div>
+                    <div class="left_title">
+                        <p>
+                           <?= $product['esm'] ?>
+                        </p>
+                        <p>
+                            <?= $product['nevisande'] ?>
+                        </p>
+                        <p>
+                            <?= $product['entInfo']['nam'] ?>
+                        </p>
+                    </div>
+                </td>
+                <td>
+                    <div class="choose_option">
                 <span class="option_selected">
                     1
                 </span>
-                    <ul class="nashers">
-                        <li>
-                            1
-                        </li>
-                        <li>
-                            2
-                        </li>
-                        <li>
-                            3
-                        </li>
-                        <li>
-                            4
-                        </li>
-                        <li>
-                            5
-                        </li>
-                        <li>
-                            6
-                        </li>
-                        <li>
-                            7
-                        </li>
-                        <li>
-                            8
-                        </li>
-                        <li>
-                            9
-                        </li>
-                        <li>
-                            10
-                        </li>
-                    </ul>
-                </div>
-            </td>
-            <td class="one_price">
-                مبلغ واحد:
-                <br>
-                30,000
-            </td>
-            <td class="all_price">
-                مبلغ کل:
-                <br>
-                30,000
-            </td>
-        </tr>
+                        <ul class="nashers">
+                            <li>
+                                1
+                            </li>
+                            <li>
+                                2
+                            </li>
+                            <li>
+                                3
+                            </li>
+                            <li>
+                                4
+                            </li>
+                            <li>
+                                5
+                            </li>
+                            <li>
+                                6
+                            </li>
+                            <li>
+                                7
+                            </li>
+                            <li>
+                                8
+                            </li>
+                            <li>
+                                9
+                            </li>
+                            <li>
+                                10
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+                <td class="one_price">
+                    مبلغ واحد:
+                    <br>
+                    <?= $product['gheymat'] ?>
+                </td>
+                <td class="all_price">
+                    مبلغ کل:
+                    <br>
+                    <?= $product['tedad'] * $product['gheymat']; ?>
+                </td>
+            </tr>
+            <?php
+        }
+        ?>
     </table>
 </div>
+
 <script>
     $('.choose_option').click(function () {
         $(this).find('.nashers').slideToggle(100);
