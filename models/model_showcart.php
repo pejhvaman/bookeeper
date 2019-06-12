@@ -13,12 +13,23 @@ class model_showcart extends Model
         $cookie = self::getBasketCookie();
         $param = [$cookie];
         $result = $this->doSelect($sql, $param);
-        $ident = $result[0];
 
-        $entInfo = $this->getEntInfo($ident['identesharat']);
-        $result[0]['entInfo'] = $entInfo;
+        foreach ($result as $key => $value) {
+            $entInfo = $this->getEntInfo($value['identesharat']);
+            $result[$key]['entInfo'] = $entInfo;
+        }
+
+        $priceTotalAll = 0;
+        foreach ($result as $item)
+        {
+            $price = $item['gheymat'];
+            $tedad = $item['tedad'];
+            $priceTotal = $price * $tedad;
+            $priceTotalAll = $priceTotalAll + $priceTotal;
+        }
+
         //print_r($result);
-        return $result;
+        return [$result, $priceTotalAll];
     }
 
     function getEntInfo($ident)
@@ -27,4 +38,11 @@ class model_showcart extends Model
         $entInfo = $this->doSelect($sql, [$ident], 1);
         return $entInfo;
     }
+
+    function deleteBasket($id)
+    {
+        $sql = "delete from tbl_basket where id in (?)";
+        $this->doQuery($sql, [$id]);
+    }
+
 }

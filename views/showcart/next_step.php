@@ -50,13 +50,16 @@
     }
 
 </style>
+<?php
+$totPrice = $data['totPrice'];
+?>
 <div id="goto_next">
     <div class="row_s">
         <p style="color: #6f6f6f;margin-top: 20px">
             مبلغ قابل پرداخت
         </p>
         <p style="color:#e54a86;margin-bottom: 20px">
-            30,000
+            <?= $totPrice ?>
             تومان
         </p>
     </div>

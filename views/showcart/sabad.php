@@ -144,7 +144,7 @@
             ?>
             <tr>
                 <td>
-                    <span class="delete_prod"></span>
+                    <span class="delete_prod" onclick="deleteBasket(<?= $product['basketId'] ?>)"></span>
                 </td>
                 <td style="width: 380px">
                     <div class="right_img">
@@ -152,7 +152,7 @@
                     </div>
                     <div class="left_title">
                         <p>
-                           <?= $product['esm'] ?>
+                            <?= $product['esm'] ?>
                         </p>
                         <p>
                             <?= $product['nevisande'] ?>
@@ -163,7 +163,7 @@
                     </div>
                 </td>
                 <td>
-                    <div class="choose_option">
+                    <div class="choose_option" onclick="openOptions(this)">
                 <span class="option_selected">
                     1
                 </span>
@@ -219,9 +219,21 @@
 </div>
 
 <script>
-    $('.choose_option').click(function () {
-        $(this).find('.nashers').slideToggle(100);
-    });
+    function deleteBasket(basketId) {
+        var url = 'showcart/deletebasket/' + basketId;
+        var data = {};
+        $.post(url, data, function (msg) {
+            $('table tbody tr').remove();
+            $.each(msg, function (index, value) {
+                var trTag = '<tr><td><span class="delete_prod" onclick="deleteBasket(' + value['basketId'] + ')"></span></td><td style="width: 380px"><div class="right_img"><img src="public/images/books/' + value['id'] + '/book_100.jpg"></div><div class="left_title"><p>' + value['esm'] + '</p><p>' + value['nevisande'] + '</p><p>' + value['entInfo']['nam'] + '</p></div></td><td><div class="choose_option" onclick="openOptions(this)"><span class="option_selected">1</span><ul class="nashers"><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li></ul></div></td><td class="one_price">مبلغ واحد:<br>' + value['gheymat'] + '</td><td class="all_price">مبلغ کل:<br>' + value['gheymat'] * value['tedad'] + '</td></tr>';
+                $('table tbody').html(trTag);
+            });
+        }, 'json');
+    }
+
+    function openOptions(tag) {
+        $(tag).find('.nashers').slideToggle(100);
+    }
 
     $('.nashers li').click(function () {
         var textOpt = $(this).text();
