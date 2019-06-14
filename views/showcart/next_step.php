@@ -58,9 +58,9 @@ $totPrice = $data['totPrice'];
         <p style="color: #6f6f6f;margin-top: 20px">
             مبلغ قابل پرداخت
         </p>
-        <p style="color:#e54a86;margin-bottom: 20px">
+        <p id="totPrice" style="color:#e54a86;margin-bottom: 20px">
             <?= $totPrice ?>
-            تومان
+           <span> تومان</span>
         </p>
     </div>
     <div class="row_s">

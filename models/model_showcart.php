@@ -24,7 +24,7 @@ class model_showcart extends Model
             $price = $item['gheymat'];
             $tedad = $item['tedad'];
             $priceTotal = $price * $tedad;
-            $priceTotalAll = $priceTotalAll + $priceTotal;
+            $priceTotalAll += $priceTotal;
         }
 
         //print_r($result);
