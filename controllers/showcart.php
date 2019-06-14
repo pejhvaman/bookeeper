@@ -22,4 +22,13 @@ class showcart extends Controller
         echo json_encode($basket);
     }
 
+    function updatebasket()
+    {
+        $basketId = $_POST['basketId'];
+        $tedad = $_POST['tedad'];
+        $this->model->updateBasket($basketId, $tedad);
+        $basket = $this->model->getBasket();
+        echo json_encode($basket);
+    }
+
 }

@@ -20,8 +20,7 @@ class model_showcart extends Model
         }
 
         $priceTotalAll = 0;
-        foreach ($result as $item)
-        {
+        foreach ($result as $item) {
             $price = $item['gheymat'];
             $tedad = $item['tedad'];
             $priceTotal = $price * $tedad;
@@ -45,4 +44,9 @@ class model_showcart extends Model
         $this->doQuery($sql, [$id]);
     }
 
+    function updateBasket($basketId, $tedad)
+    {
+        $sql = "update tbl_basket set tedad=? where id=?";
+        $this->doQuery($sql, [$tedad, $basketId]);
+    }
 }

@@ -40,6 +40,7 @@
 
     .choose_option .nashers {
         padding: 0;
+        height: 200px;
         border-radius: 5px;
         border: 1px solid #e9e9e9;
         background: #f9f9f9;
@@ -47,6 +48,7 @@
         display: none;
         position: relative; /* remember this trick!:position relative + z-index */
         z-index: 4;
+        overflow: scroll;
     }
 
     .choose_option .nashers li {
@@ -165,40 +167,22 @@
                 <td>
                     <div class="choose_option" onclick="openOptions(this)">
                 <span class="option_selected">
-                    1
+                    <?= $product['tedad'] ?>
                 </span>
                         <ul class="nashers">
-                            <li>
-                                1
-                            </li>
-                            <li>
-                                2
-                            </li>
-                            <li>
-                                3
-                            </li>
-                            <li>
-                                4
-                            </li>
-                            <li>
-                                5
-                            </li>
-                            <li>
-                                6
-                            </li>
-                            <li>
-                                7
-                            </li>
-                            <li>
-                                8
-                            </li>
-                            <li>
-                                9
-                            </li>
-                            <li>
-                                10
-                            </li>
+                            <?php
+                            for ($i = 1; $i < 31; $i++) {
+
+                                ?>
+                                <li onclick="updateBasket(<?= $product['basketId'] ?>,<?= $i ?>)">
+                                    <?= $i ?>
+                                </li>
+                                <?php
+                            }
+                            ?>
+
                         </ul>
+
                     </div>
                 </td>
                 <td class="one_price">
@@ -219,16 +203,32 @@
 </div>
 
 <script>
+    function updateBasket(basketId, num) {
+        var url = 'showcart/updatebasket';
+        var data = {'basketId': basketId, 'tedad': num};
+        $.post(url, data, function (msg) {
+            $basket = msg[0];
+            $totPrice = msg[1];
+            createBasketList(msg[0], msg[1]);
+        }, 'json');
+    }
+
     function deleteBasket(basketId) {
         var url = 'showcart/deletebasket/' + basketId;
         var data = {};
         $.post(url, data, function (msg) {
-            $('table tbody tr').remove();
-            $.each(msg, function (index, value) {
-                var trTag = '<tr><td><span class="delete_prod" onclick="deleteBasket(' + value['basketId'] + ')"></span></td><td style="width: 380px"><div class="right_img"><img src="public/images/books/' + value['id'] + '/book_100.jpg"></div><div class="left_title"><p>' + value['esm'] + '</p><p>' + value['nevisande'] + '</p><p>' + value['entInfo']['nam'] + '</p></div></td><td><div class="choose_option" onclick="openOptions(this)"><span class="option_selected">1</span><ul class="nashers"><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li></ul></div></td><td class="one_price">مبلغ واحد:<br>' + value['gheymat'] + '</td><td class="all_price">مبلغ کل:<br>' + value['gheymat'] * value['tedad'] + '</td></tr>';
-                $('table tbody').html(trTag);
-            });
+            $basket = msg[0];
+            $totPrice = msg[1];
+            createBasketList(msg[0], msg[1]);
         }, 'json');
+    }
+
+    function createBasketList(basket, totPrice) {
+        $('table tbody tr').remove();
+        $.each(basket, function (index, value) {
+            var trTag = '<tr><td><span class="delete_prod" onclick="deleteBasket(' + value['basketId'] + ')"></span></td><td style="width: 380px"><div class="right_img"><img src="public/images/books/' + value['id'] + '/book_100.jpg"></div><div class="left_title"><p>' + value['esm'] + '</p><p>' + value['nevisande'] + '</p><p>' + value['entInfo']['nam'] + '</p></div></td><td><div class="choose_option" onclick="openOptions(this)"><span class="option_selected">' + value['tedad'] + '</span><ul class="nashers"></ul></div></td><td class="one_price">مبلغ واحد:<br>' + value['gheymat'] + '</td><td class="all_price">مبلغ کل:<br>' + totPrice + '</td></tr>';
+            $('table tbody').append(trTag);
+        });
     }
 
     function openOptions(tag) {
