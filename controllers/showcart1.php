@@ -13,4 +13,10 @@ class showcart1 extends Controller
         $data = ['address'=>$address];
         $this->view('showcart1/index', $data);
     }
+    function addtoaddress()
+    {
+        if (isset($_POST['shahr'])){
+            $this->model->addToAddress($_POST);
+        }
+    }
 }

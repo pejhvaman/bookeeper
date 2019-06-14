@@ -114,7 +114,7 @@
         border-radius: 4px;
     }
 </style>
-<form action="showcart1" method="post">
+<form id="addressForm" action="showcart1/addtoaddress" method="post">
     <div id="add_address">
         <div class="roww">
         <span id="title_adding">
@@ -141,7 +141,7 @@
                 <p>
                     استان
                 </p>
-                <select onchange="ostan(this)" title="انتخاب استان">
+                <select name="state" onchange="ostan(this)" title="انتخاب استان">
                     <option value="">
                         انتخاب استان
                     </option>
@@ -158,7 +158,7 @@
                     شهر
                 </p>
                 <span class="shahr">
-                <select title="انتخاب شهر">
+                <select name="shahr" title="انتخاب شهر">
                     <option value="">
                     انتخاب شهر
                     </option>
@@ -179,7 +179,7 @@
             <input name="kodposti" placeholder="کد پستی را بدون خط تیره بنویسید">
         </div>
         <div class="roww" style="height: 60px">
-        <span onclick="submitAddressForm()" class="addBtn sans">
+        <span id="submitTheAddress" onclick="submitAddressForm()" class="addBtn sans">
             ثبت اطلاعات وارد شده
         </span>
         </div>
@@ -188,7 +188,11 @@
 
 <script>
     function submitAddressForm() {
-
+        var url = 'showcart1/addtoaddress';
+        var data = $('#addressForm').serializeArray();
+        $.post(url, data, function (msg) {
+            console.log(msg);
+        });
     }
 
     function ostan(tag) {
@@ -213,7 +217,10 @@
     $('#close_page').click(function () {
         $('#dark').fadeOut(100);
         $(this).parents('#add_address').fadeOut(100);
-
+    });
+    $('#submitTheAddress').click(function () {
+        $('#dark').fadeOut(100);
+        $('#add_address').fadeOut(100);
     });
 </script>
 <style>
