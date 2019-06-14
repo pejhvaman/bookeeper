@@ -119,11 +119,11 @@ $address = $data['address'];
                     <table cellpadding="0" cellspacing="0">
                         <tr>
                             <td>
-                                <span class="edit_add"></span>
+                                <span onclick="editAddress(<?= $item['id'] ?>)" class="edit_add"></span>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td onclick="">
                                 <span class="delete_add"></span>
                             </td>
                         </tr>
@@ -180,6 +180,31 @@ $address = $data['address'];
     ?>
 </div>
 <script>
+
+    function editAddress(addressId) {
+        var url = 'showcart1/editaddress/' + addressId;
+        var data = {};
+        $.post(url, data, function (msg) {
+            console.log(msg);
+            $('#dark').fadeIn(100);
+            $('#add_address').fadeIn(100);
+            $('input[name=nam]').val(msg['nam']);
+            $('input[name=shomare]').val(msg['shomare']);
+            $('textarea[name=adres]').val(msg['adres']);
+            $('input[name=kodposti]').val(msg['kodposti']);
+            var state = msg['ostan'];
+            var city = msg['shahr'];
+            $('.ostan_select option').each(function (index) {
+                var statename = $(this).val();
+                console.log(statename);
+                if (statename == state) {
+                    //document.getElementById("ostan_select").selectedIndex = "2";
+                    $(this).attr('selected', 'selected');
+                    ostan($('.ostan_select'));
+                }
+            });
+        }, 'json');
+    }
 
     $('#sabad .select_but').click(function () {
         $(this).toggleClass('activeAddress');

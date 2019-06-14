@@ -141,12 +141,12 @@
                 <p>
                     استان
                 </p>
-                <select name="state" onchange="ostan(this)" title="انتخاب استان">
+                <select id="ostan_select" class="ostan_select" name="state" onchange="ostan(this)" title="انتخاب استان">
                     <option value="">
                         انتخاب استان
                     </option>
-                    <option data-val="1" value="آذربایجان شرقی">
-                        آذربایجان شرقی
+                    <option data-val="1" value="تهران">
+                        تهران
                     </option>
                     <option data-val="2" value="آذربایجان غربی">
                         آذربایجان غربی
@@ -188,11 +188,12 @@
 
 <script>
     function submitAddressForm() {
+        //alert('');
         var url = 'showcart1/addtoaddress';
         var data = $('#addressForm').serializeArray();
         $.post(url, data, function (msg) {
             console.log(msg);
-        });
+        },'json');
     }
 
     function ostan(tag) {
@@ -218,10 +219,10 @@
         $('#dark').fadeOut(100);
         $(this).parents('#add_address').fadeOut(100);
     });
-    $('#submitTheAddress').click(function () {
+    /*$('#submitTheAddress').click(function () {
         $('#dark').fadeOut(100);
         $('#add_address').fadeOut(100);
-    });
+    });*/
 </script>
 <style>
     #dark {

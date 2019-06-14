@@ -26,6 +26,7 @@ require ('rahgiri.php');
             $('#dark').fadeIn(100);
             $('#add_address').fadeIn(100);
         });
+
     </script>
 <?php
 require ('right_side.php');

@@ -2,6 +2,8 @@
 
 class model_showcart1 extends Model
 {
+    //private $userId = 0;
+
     function __construct()
     {
         parent::__construct();
@@ -9,8 +11,10 @@ class model_showcart1 extends Model
 
     function getAddress()
     {
-        $sql = "select * from tbl_user_address";
-        $res = $this->doSelect($sql);
+        self::sessionInit();
+        $iduser = self::sessionGet('userId');
+        $sql = "select * from tbl_user_address where iduser=?";
+        $res = $this->doSelect($sql, [$iduser]);
         return $res;
     }
 
@@ -28,4 +32,12 @@ class model_showcart1 extends Model
         $params = [$iduser, $nam, $shomare, $state, $shahr, $adres, $kodposti];
         $this->doQuery($sql, $params);
     }
+
+    function getAddressInfo($id)
+    {
+        $sql = "select * from tbl_user_address where id=?";
+        $res = $this->doSelect($sql, [$id],1);
+        return $res;
+    }
+
 }
