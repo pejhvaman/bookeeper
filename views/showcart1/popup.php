@@ -106,83 +106,90 @@
         line-height: 50px;
         font-size: 16pt;
     }
-    #add_address select{
+
+    #add_address select {
         font-family: sans;
         width: 330px;
         height: 50px;
         border-radius: 4px;
     }
 </style>
-<div id="add_address">
-    <div class="roww">
+<form action="showcart1" method="post">
+    <div id="add_address">
+        <div class="roww">
         <span id="title_adding">
             افزودن آدرس جدید
         </span>
-        <span id="close_page"></span>
-    </div>
-    <div class="roww">
-        <div class="roww_right">
-            <p>
-                نام و نام خانوادگی تحویل گیرنده
-            </p>
-            <input placeholder="نام تحویل گیرنده را وارد نمایید">
+            <span id="close_page"></span>
         </div>
-        <div class="roww_left">
-            <p>
-                شماره موبایل
-            </p>
-            <input placeholder="09xxxxxxxxx">
+        <div class="roww">
+            <div class="roww_right">
+                <p>
+                    نام و نام خانوادگی تحویل گیرنده
+                </p>
+                <input name="nam" placeholder="نام تحویل گیرنده را وارد نمایید">
+            </div>
+            <div class="roww_left">
+                <p>
+                    شماره موبایل
+                </p>
+                <input name="shomare" placeholder="09xxxxxxxxx">
+            </div>
         </div>
-    </div>
-    <div class="roww">
-        <div class="roww_right">
-            <p>
-                استان
-            </p>
-            <select onchange="ostan(this)" title="انتخاب استان">
-                <option value="">
-                    انتخاب استان
-                </option>
-                <option data-val="1" value="آذربایجان شرقی">
-                    آذربایجان شرقی
-                </option>
-                <option data-val="2" value="آذربایجان غربی">
-                    آذربایجان غربی
-                </option>
-            </select>
-        </div>
-        <div class="roww_left">
-            <p>
-                شهر
-            </p>
-            <span class="shahr">
+        <div class="roww">
+            <div class="roww_right">
+                <p>
+                    استان
+                </p>
+                <select onchange="ostan(this)" title="انتخاب استان">
+                    <option value="">
+                        انتخاب استان
+                    </option>
+                    <option data-val="1" value="آذربایجان شرقی">
+                        آذربایجان شرقی
+                    </option>
+                    <option data-val="2" value="آذربایجان غربی">
+                        آذربایجان غربی
+                    </option>
+                </select>
+            </div>
+            <div class="roww_left">
+                <p>
+                    شهر
+                </p>
+                <span class="shahr">
                 <select title="انتخاب شهر">
                     <option value="">
                     انتخاب شهر
                     </option>
                 </select>
             </span>
+            </div>
         </div>
-    </div>
-    <div style="width: 96%;float: left;height: 140px" class="roww">
-        <p>
-            آدرس پستی
-        </p>
-        <textarea placeholder="آدرس تحویل گیرنده را وارد نمایید"></textarea>
-    </div>
-    <div class="roww" style="width: 96%;float: left;">
-        <p>
-            کد پستی
-        </p>
-        <input placeholder="کد پستی را بدون خط تیره بنویسید">
-    </div>
-    <div class="roww" style="height: 60px">
-        <span class="addBtn sans">
+        <div style="width: 96%;float: left;height: 140px" class="roww">
+            <p>
+                آدرس پستی
+            </p>
+            <textarea name="adres" placeholder="آدرس تحویل گیرنده را وارد نمایید"></textarea>
+        </div>
+        <div class="roww" style="width: 96%;float: left;">
+            <p>
+                کد پستی
+            </p>
+            <input name="kodposti" placeholder="کد پستی را بدون خط تیره بنویسید">
+        </div>
+        <div class="roww" style="height: 60px">
+        <span onclick="submitAddressForm()" class="addBtn sans">
             ثبت اطلاعات وارد شده
         </span>
+        </div>
     </div>
-</div>
+</form>
+
 <script>
+    function submitAddressForm() {
+
+    }
 
     function ostan(tag) {
         var id = $(tag).find('option:selected').attr('data-val');

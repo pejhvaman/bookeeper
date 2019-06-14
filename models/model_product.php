@@ -156,9 +156,16 @@ class model_product extends Model
     function addToBasket($idbook)
     {
         $cookie = self::getBasketCookie();
+        $sql = "select * from tbl_basket where cookie=? and idbook=?";
         $param = [$cookie, $idbook];
-        $sql = "insert into tbl_basket (cookie, idbook) values (?, ?)";
-        $this->doQuery($sql,$param);
+        $res = $this->doSelect($sql, $param);
+
+        if (isset($res[0])) {
+            $sql = "update tbl_basket set tedad=tedad + 1 where cookie=? and idbook=?";
+        } else {
+            $sql = "insert into tbl_basket (cookie, idbook, tedad) values (?, ?, 1)";
+        }
+        $this->doQuery($sql, $param);
 
     }
 }

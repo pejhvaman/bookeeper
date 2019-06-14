@@ -95,156 +95,89 @@
         background: white url(public/images/check-mark1.png) no-repeat center;
     }
 </style>
+<?php
+$address = $data['address'];
+?>
 <div id="sabad">
-
-    <table cellspacing="0" cellpadding="0">
-        <tr>
-            <td rowspan="3" width="50px">
-                <span class="select_but"></span>
-            </td>
-            <td colspan="2">
+    <?php
+    foreach ($address as $item) {
+        ?>
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td rowspan="3" width="50px">
+                    <span class="select_but"></span>
+                </td>
+                <td colspan="2">
                     <span class="title_add" style="font-size: 14pt;">
                         گیرنده:
                     </span>
-                <span class="value_add" style="font-size: 14pt;">
-                    پژمان یزدان خواه
+                    <span class="value_add" style="font-size: 14pt;">
+                    <?= $item['nam'] ?>
                     </span>
-            </td>
-            <td class="editendelete" rowspan="3" width="50px">
-                <table cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td>
-                            <span class="edit_add"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="delete_add"></span>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 220px">
+                </td>
+                <td class="editendelete" rowspan="3" width="50px">
+                    <table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <span class="edit_add"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="delete_add"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 220px">
                     <span class="title_add">
                         شماره تماس:
                     </span>
-                <span class="value_add">
-                      0938874545484
+                    <span class="value_add">
+                      <?= $item['shomare'] ?>
                     </span>
-            </td>
-            <td>
+                </td>
+                <td>
                     <span class="title_add">
                         کد پستی:
                     </span>
-                <span class="value_add">
-                      89952399262
+                    <span class="value_add">
+                      <?= $item['kodposti'] ?>
                     </span>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" style="height: 60px;vertical-align: top">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height: 60px;vertical-align: top">
 
                         <span class="ostan_name">
                             <span>
                                 استان
                             </span>
                             <span>
-                                کردستان
+                                <?= $item['ostan'] ?>
                             </span>
                         </span>
-                ،
-                <span class="shahr_name">
+                    ،
+                    <span class="shahr_name">
                             <span>
                                 شهر
                             </span>
                             <span>
-                                سقز
+                                <?= $item['shahr'] ?>
                             </span>
                         </span>
-                ،
-                <span class="posti_address">
-                            آدرس پستی
+                    ،
+                    <span class="posti_address">
+                            <?= $item['adres'] ?>
                         </span>
-
-            </td>
-        </tr>
-    </table>
-    <table cellspacing="0" cellpadding="0">
-        <tr>
-            <td rowspan="3" width="50px">
-                <span class="select_but"></span>
-            </td>
-            <td colspan="2">
-                    <span class="title_add" style="font-size: 14pt;">
-                        گیرنده:
-                    </span>
-                <span class="value_add" style="font-size: 14pt;">
-                    پژمان یزدان خواه
-                    </span>
-            </td>
-            <td class="editendelete" rowspan="3" width="50px">
-                <table cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td>
-                            <span class="edit_add"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="delete_add"></span>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 220px">
-                    <span class="title_add">
-                        شماره تماس:
-                    </span>
-                <span class="value_add">
-                      0938874545484
-                    </span>
-            </td>
-            <td>
-                    <span class="title_add">
-                        کد پستی:
-                    </span>
-                <span class="value_add">
-                      89952399262
-                    </span>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" style="height: 60px;vertical-align: top">
-
-                        <span class="ostan_name">
-                            <span>
-                                استان
-                            </span>
-                            <span>
-                                کردستان
-                            </span>
-                        </span>
-                ،
-                <span class="shahr_name">
-                            <span>
-                                شهر
-                            </span>
-                            <span>
-                                سقز
-                            </span>
-                        </span>
-                ،
-                <span class="posti_address">
-                            آدرس پستی
-                        </span>
-
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+        </table>
+        <?php
+    }
+    ?>
 </div>
 <script>
 
