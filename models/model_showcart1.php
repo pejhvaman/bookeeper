@@ -18,8 +18,9 @@ class model_showcart1 extends Model
         return $res;
     }
 
-    function addToAddress($data)
+    function addToAddress($data, $addressId)
     {
+
         self::sessionInit();
         $iduser = self::sessionGet('userId');
         $nam = $data['nam'];
@@ -28,15 +29,22 @@ class model_showcart1 extends Model
         $shahr = $data['shahr'];
         $adres = $data['adres'];
         $kodposti = $data['kodposti'];
-        $sql = "insert into tbl_user_address (iduser, nam, shomare, ostan, shahr, adres, kodposti) values (?,?,?,?,?,?,?)";
-        $params = [$iduser, $nam, $shomare, $state, $shahr, $adres, $kodposti];
+
+
+        if ($addressId == '') {
+            $sql = "insert into tbl_user_address (iduser, nam, shomare, ostan, shahr, adres, kodposti) values (?,?,?,?,?,?,?)";
+            $params = [$iduser, $nam, $shomare, $state, $shahr, $adres, $kodposti];
+        } else {
+            $sql = "update tbl_user_address set nam=?, shomare=?, ostan=?, shahr=?, adres=?, kodposti=? where id=?";
+            $params = [$nam, $shomare, $state, $shahr, $adres, $kodposti, $addressId];
+        }
         $this->doQuery($sql, $params);
     }
 
     function getAddressInfo($id)
     {
         $sql = "select * from tbl_user_address where id=?";
-        $res = $this->doSelect($sql, [$id],1);
+        $res = $this->doSelect($sql, [$id], 1);
         return $res;
     }
 

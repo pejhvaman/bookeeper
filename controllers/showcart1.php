@@ -14,11 +14,9 @@ class showcart1 extends Controller
         $this->view('showcart1/index', $data);
     }
 
-    function addtoaddress()
+    function addtoaddress($addressId='')
     {
-        $this->model->addToAddress($_POST);
-        /*$address = $this->model->getAddress();
-        echo json_encode($address);*/
+        $this->model->addToAddress($_POST, $addressId);
     }
 
     function editaddress($addressId)

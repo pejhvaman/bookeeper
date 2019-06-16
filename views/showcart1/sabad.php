@@ -182,12 +182,16 @@ $address = $data['address'];
 <script>
 
     function editAddress(addressId) {
+        editAddressId = addressId;
         var url = 'showcart1/editaddress/' + addressId;
         var data = {};
         $.post(url, data, function (msg) {
             console.log(msg);
             $('#dark').fadeIn(100);
             $('#add_address').fadeIn(100);
+            $('#addressForm').trigger("reset");
+            $('#ostan_select').prop('selectedIndex', 0);
+            $('#shahr_select').prop('selectedIndex', 0);
             $('input[name=nam]').val(msg['nam']);
             $('input[name=shomare]').val(msg['shomare']);
             $('textarea[name=adres]').val(msg['adres']);
@@ -196,11 +200,20 @@ $address = $data['address'];
             var city = msg['shahr'];
             $('.ostan_select option').each(function (index) {
                 var statename = $(this).val();
-                console.log(statename);
                 if (statename == state) {
+                    console.log(statename);
                     //document.getElementById("ostan_select").selectedIndex = "2";
                     $(this).attr('selected', 'selected');
-                    ostan($('.ostan_select'));
+                    Ostan($('.ostan_select'));
+                }
+            });
+            $('.shahr_select option').each(function (index) {
+                var cityName = $(this).val();
+                if (cityName == city) {
+                    console.log(cityName);
+                    //document.getElementById("ostan_select").selectedIndex = "2";
+                    $(this).attr('selected', 'selected');
+                    //Ostan($('.ostan_select'));
                 }
             });
         }, 'json');
@@ -211,4 +224,6 @@ $address = $data['address'];
         /*$('#sabad .select_but').removeClass('activeAddress');
         $(this).addClass('activeAddress');*/
     });
+
+
 </script>
