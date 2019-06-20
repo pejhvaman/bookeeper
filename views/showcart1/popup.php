@@ -346,7 +346,7 @@
         var data = $('#addressForm').serializeArray();
         $.post(url, data, function (msg) {
             console.log(msg);
-            //window.location = 'showcart1';
+            window.location = 'showcart1';
         });
     }
 

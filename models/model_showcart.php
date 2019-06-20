@@ -49,4 +49,10 @@ class model_showcart extends Model
         $sql = "update tbl_basket set tedad=? where id=?";
         $this->doQuery($sql, [$tedad, $basketId]);
     }
+
+    function sessionForTotPrice($totPrice)
+    {
+        self::sessionInit();
+        self::sessionSet('totPrice', $totPrice);
+    }
 }

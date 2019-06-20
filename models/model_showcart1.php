@@ -11,7 +11,7 @@ class model_showcart1 extends Model
 
     function getAddress()
     {
-        self::sessionInit();
+        @self::sessionInit();
         $iduser = self::sessionGet('userId');
         $sql = "select * from tbl_user_address where iduser=?";
         $res = $this->doSelect($sql, [$iduser]);
@@ -21,7 +21,7 @@ class model_showcart1 extends Model
     function addToAddress($data, $addressId)
     {
 
-        self::sessionInit();
+        @self::sessionInit();
         $iduser = self::sessionGet('userId');
         $nam = $data['nam'];
         $shomare = $data['shomare'];
@@ -48,4 +48,39 @@ class model_showcart1 extends Model
         return $res;
     }
 
+    function deleteAddress($id)
+    {
+        $sql = "delete from tbl_user_address where id=?";
+        $this->doQuery($sql, [$id]);
+    }
+
+    function getPostTypes()
+    {
+        $sql = "select * from tbl_post_type";
+        $res = $this->doSelect($sql);
+        return $res;
+    }
+
+    function chosenAddress($id)
+    {
+        $sql = "select * from tbl_user_address where id=?";
+        $res = $this->doSelect($sql, [$id], 1);
+        @self::sessionInit();
+        self::sessionSet('chosen_address', serialize($res));
+    }
+
+    function getTotalPriceOfPrevStep()
+    {
+        @self::sessionInit();
+        $total_price = self::sessionGet('total_price');
+        return $total_price;
+    }
+
+    function getPostTypePriceById($id)
+    {
+        $sql = "select * from tbl_post_type where id=?";
+        $res = $this->doSelect($sql, [$id], 1);
+        $post_type_price = $res['hazine'];
+        return $post_type_price;
+    }
 }

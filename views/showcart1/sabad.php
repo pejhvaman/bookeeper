@@ -102,10 +102,10 @@ $address = $data['address'];
     <?php
     foreach ($address as $item) {
         ?>
-        <table cellspacing="0" cellpadding="0">
+        <table data-id="<?= $item['id'] ?>" class="address_block" cellspacing="0" cellpadding="0">
             <tr>
                 <td rowspan="3" width="50px">
-                    <span class="select_but"></span>
+                    <span onclick="chosenAddress()" class="select_but"></span>
                 </td>
                 <td colspan="2">
                     <span class="title_add" style="font-size: 14pt;">
@@ -124,7 +124,7 @@ $address = $data['address'];
                         </tr>
                         <tr>
                             <td onclick="">
-                                <span class="delete_add"></span>
+                                <span onclick="deleteAddress(<?= $item['id'] ?>)" class="delete_add"></span>
                             </td>
                         </tr>
                     </table>
@@ -181,6 +181,23 @@ $address = $data['address'];
 </div>
 <script>
 
+    function deleteAddress(id) {
+        var addressId = id;
+        var url = "showcart1/deleteaddress";
+        var data = {"addressId": addressId};
+        $.post(url, data, function (msg) {
+            console.log(msg);
+            //window.location = "showcart1";
+            //alert(msg['nam']);
+            $.each(msg , function (index, value) {
+                var addressTable = '<table data-id="' + value['id'] + '" class="address_block" cellspacing="0" cellpadding="0"><tr><td rowspan="3" width="50px"><span onclick="chosenAddress()" class="select_but"></span></td><td colspan="2"><span class="title_add" style="font-size: 14pt;">گيرنده:</span><span class="value_add" style="font-size: 14pt;">' + value['nam'] + '</span></td><td class="editendelete" rowspan="3" width="50px"><table cellpadding="0" cellspacing="0"><tr><td><span onclick="editAddress(' + value['id'] + ')" class="edit_add"></span></td></tr><tr><td onclick=""><span class="delete_add" onclick="deleteAddress(' + value['id'] + ')"></span></td></tr></table></td></tr><tr><td style="width: 220px"><span class="title_add">شماره تماس:</span><span class="value_add">' + value['shomare'] + '</span></td><td><span class="title_add">کد پستي:</span><span class="value_add">' + value['kodposti'] + '</span></td></tr><tr><td colspan="2" style="height: 60px;vertical-align: top"><span class="ostan_name"><span> استان </span><span>' + value['ostan'] + '</span></span>،<span class="shahr_name"><span> شهر </span><span>' + value['shahr'] + '</span></span>،<span class="posti_address">' + value['adres'] + '</span></td></tr></table>';
+                var addressSec = $('#sabad');
+                addressSec.html(addressTable);
+            });
+
+        }, 'json');
+    }
+
     function editAddress(addressId) {
         editAddressId = addressId;
         var url = 'showcart1/editaddress/' + addressId;
@@ -220,10 +237,22 @@ $address = $data['address'];
     }
 
     $('#sabad .select_but').click(function () {
-        $(this).toggleClass('activeAddress');
-        /*$('#sabad .select_but').removeClass('activeAddress');
-        $(this).addClass('activeAddress');*/
+        //$(this).toggleClass('activeAddress');
+        $('#sabad .select_but').removeClass('activeAddress');
+        $(this).addClass('activeAddress');
     });
+    $('#sabad table').eq(0).find('.select_but').addClass('activeAddress');
+
+    function chosenAddress() {
+        var activeButton = $('#sabad .select_but.activeAddress');
+        var activeTable = activeButton.parents('table.address_block');
+        var idAddress = activeTable.attr('data-id');
+        var url = "showcart1/chosenaddress";
+        var data = {'addressId':idAddress};
+        $.post(url, data, function (msg) {
+            console.log(msg);
+        });
+    }
 
 
 </script>

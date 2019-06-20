@@ -1,4 +1,3 @@
-
 <style>
     .addBtn {
         display: block;
@@ -60,12 +59,23 @@ $totPrice = $data['totPrice'];
         </p>
         <p id="totPrice" style="color:#e54a86;margin-bottom: 20px">
             <?= $totPrice ?>
-           <span> تومان</span>
+            <span> تومان</span>
         </p>
     </div>
     <div class="row_s">
-            <a class="addBtn" href="showcart_registry">
-                ادامه ثبت سفارش
-            </a>
+        <a class="addBtn" href="showcart_registry">
+            ادامه ثبت سفارش
+        </a>
     </div>
+    <script>
+        function sessionForTotPrice() {
+            var tot_price = <?= $totPrice ?> ;
+            var url = "showcart/session_for_totPrice";
+            var data = {'totPrice': tot_price};
+            $.post(url, data, function (msg) {
+
+            });
+        }
+        sessionForTotPrice();
+    </script>
 </div>

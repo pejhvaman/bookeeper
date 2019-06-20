@@ -31,4 +31,10 @@ class showcart extends Controller
         echo json_encode($basket);
     }
 
+    function session_for_totPrice()
+    {
+        $totPrice = $_POST['totPrice'];
+        $this->model->sessionForTotPrice($totPrice);
+    }
+
 }
