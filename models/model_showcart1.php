@@ -76,11 +76,14 @@ class model_showcart1 extends Model
         return $total_price;
     }
 
-    function getPostTypePriceById($id)
+    function getPostTypePriceByIdAndSetSessionForPostType($id)
     {
         $sql = "select * from tbl_post_type where id=?";
         $res = $this->doSelect($sql, [$id], 1);
+        @self::sessionInit();
+        self::sessionSet('post_type', serialize($res));
         $post_type_price = $res['hazine'];
         return $post_type_price;
     }
+
 }

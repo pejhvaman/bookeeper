@@ -66,8 +66,8 @@ $totPrice = $data['totPrice'];
         </p>
     </div>
     <div class="row_s">
-            <span class="addBtn">
+            <a href="showcart2" class="addBtn">
                 تایید و ادامه ثبت سفارش
-            </span>
+            </a>
     </div>
 </div>

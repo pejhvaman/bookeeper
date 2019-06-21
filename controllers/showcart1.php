@@ -43,8 +43,9 @@ class showcart1 extends Controller
 
     function updatetotprice_sessionnewtotprice()
     {
+        //
         $id_post_type = $_POST['id_post_type'];
-        $post_type_price = $this->model->getPostTypePriceById($id_post_type);
+        $post_type_price = $this->model->getPostTypePriceByIdAndSetSessionForPostType($id_post_type);
         $totPrice = $this->model->getTotalPriceOfPrevStep();
         $msg = [$post_type_price, $totPrice];
         echo json_encode($msg);

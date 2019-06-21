@@ -9,6 +9,8 @@ class showcart2 extends Controller
 
     function index()
     {
-        $this->view('showcart2/index');
+        //$addressInfo = $this->model->getPrevChosenAddress();
+        $data = [];
+        $this->view('showcart2/index', $data);
     }
 }

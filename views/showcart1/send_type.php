@@ -98,7 +98,8 @@ $post_types = $data['post_types'];
             var activeButton = $('#send_type .select_but.activeAddress');
             var idPostType = activeButton.attr('data-idposttype');
             //var activePostType = activeButton.parents('table.post_type_block');
-            //var idAddress = activeTable.attr('data-id');
+            //var idPostType = activePostType.attr('data-id');
+
             var url = "showcart1/updatetotprice_sessionnewtotprice";
             var data = {'id_post_type':idPostType};
             $.post(url, data, function (msg) {

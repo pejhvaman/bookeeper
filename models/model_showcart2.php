@@ -5,4 +5,14 @@ class model_showcart2 extends Model
     {
         parent::__construct();
     }
+
+    /*function getPrevChosenAddress()
+    {
+        @self::sessionInit();
+        $addressInfo = self::sessionGet('chosen_address');
+        $addressInfo = unserialize($addressInfo);
+        return $addressInfo;
+    }*/
+
+    
 }
