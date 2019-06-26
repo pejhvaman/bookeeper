@@ -52,8 +52,43 @@
     <span>
                 با ثبت کد تخفیف، مبلغ کد تخفیف از “مبلغ قابل پرداخت” کسر می‌شود.
             </span>
-    <input>
-    <span class="addBtn">
+    <input id="code_input">
+    <span onclick="checkCode()" class="addBtn">
                 ثبت کد تخفیف
     </span>
 </div>
+<script>
+    function checkCode() {
+        var code = $('#code_input').val();
+        var url = "showcart2/checkcode";
+        var data = {'code': code};
+        $.post(url, data, function (msg) {
+            //var finalPrice = parseInt(msg[1]);
+            var response = parseInt(msg[0]);
+            if (response != 0) {
+                $('#code_input').css({"border": "1px solid blue"});
+                //$('#final_price').html(finalPrice);
+                var url = "showcart2/calculatefinalprice";
+                var data = {'codeTakhfif': code};
+                $.post(url, data, function (msg) {
+                   //alert(msg);
+                   // console.log(msg);
+                    $('#final_price').html(msg);
+                }, 'json');
+            } else {
+                // var codeInput = ;
+                $('#code_input').css({"border": "1px solid orange"});
+                $('#code_input').attr('placeholder','کد تخفیف خود را وارد کنید...');
+                var url = "showcart2/calculatefinalprice";
+                var data = {'codeTakhfif': code};
+                $.post(url, data, function (msg) {
+                    //alert(msg);
+                    // console.log(msg);
+                    $('#final_price').html(msg);
+                }, 'json');
+            }
+        }, 'json');
+    }
+
+    checkCode();
+</script>

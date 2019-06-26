@@ -221,11 +221,11 @@
     <div id="header_top">
         <div id="header_top_left">
             <div class="left">
-                <span id="shopbasket">
+                <a href="showcart" id="shopbasket">
                     <span id="basket_icon"></span>
                     <span id="basket_title" class="sans">سبد خرید</span>
                     <span id="basket_count" class="sans">0</span>
-                </span>
+                </a>
             </div>
             <div class="right">
                 <div id="enter_site" onclick="openLoginMenu(this)">

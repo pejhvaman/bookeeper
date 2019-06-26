@@ -62,7 +62,7 @@ $post_types = $data['post_types'];
     <table class="post_type_block" cellspacing="0" cellpadding="0">
         <tr>
             <td width="50px">
-                <span onclick="" data-idposttype="<?= $post_type['id'] ?>" class="select_but"></span>
+                <span data-idposttype="<?= $post_type['id'] ?>" class="select_but"></span>
             </td>
             <td>
                 <i></i>
@@ -84,6 +84,7 @@ $post_types = $data['post_types'];
     endforeach;
     ?>
     <script>
+
         $('#send_type table').eq(0).find('.select_but').addClass('activeAddress');
 
         $('#send_type .select_but').click(function () {
@@ -91,9 +92,8 @@ $post_types = $data['post_types'];
             $('#send_type .select_but').removeClass('activeAddress');
             $(this).addClass('activeAddress');
             updateTotPriceOnChosenPostType();
-
         });
-
+        updateTotPriceOnChosenPostType();
         function updateTotPriceOnChosenPostType() {
             var activeButton = $('#send_type .select_but.activeAddress');
             var idPostType = activeButton.attr('data-idposttype');
@@ -109,10 +109,12 @@ $post_types = $data['post_types'];
 
                 var totPriceTag = $('#goto_next #tot_price');
                 var newTotPrice = postTypePrice + totPricePrev;
-                totPriceTag.html(newTotPrice);
+                totPriceTag.text(newTotPrice);
             }, 'json');
         }
-        updateTotPriceOnChosenPostType();
+
+
+
     </script>
 
 </div>

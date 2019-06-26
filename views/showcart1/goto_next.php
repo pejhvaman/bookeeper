@@ -57,9 +57,9 @@ $totPrice = $data['totPrice'];
             مبلغ قابل پرداخت
         </p>
         <p id="tot_price" style="color:#e54a86;margin-bottom: 20px">
-        <span >
-            <?= $totPrice ?>
-        </span>
+            <span>
+                <?= $totPrice ?>
+            </span>
         </p>
         <p style="color:#e54a86;margin-bottom: 20px">
             تومان
@@ -71,3 +71,13 @@ $totPrice = $data['totPrice'];
             </a>
     </div>
 </div>
+<script>
+    /*function showTotalPrice() {
+        var url = "showcart1/gettotpriceofprevstep";
+        var data = {};
+        $.post(url, data, function (msg) {
+            $('#tot_Price span').text(msg);
+        }, 'json');
+    }
+    showTotalPrice();*/
+</script>

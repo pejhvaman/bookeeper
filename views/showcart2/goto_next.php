@@ -30,13 +30,16 @@
     }
 
 </style>
+
 <div id="goto_next">
     <div class="row_s">
         <p style="color: #6f6f6f;margin-top: 20px">
             مبلغ قابل پرداخت
         </p>
+        <p id="final_price" style="color:#e54a86;margin-bottom: 20px">
+
+        </p>
         <p style="color:#e54a86;margin-bottom: 20px">
-            40,000
             تومان
         </p>
     </div>

@@ -50,4 +50,10 @@ class showcart1 extends Controller
         $msg = [$post_type_price, $totPrice];
         echo json_encode($msg);
     }
+    /*function gettotpriceofprevstep()
+    {
+        $totPrice = $this->model->getTotalPriceOfPrevStep();
+        echo json_encode($totPrice);
+
+    }*/
 }

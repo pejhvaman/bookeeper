@@ -15,6 +15,52 @@ class Model
         self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    function getBasket()
+    {
+        $sql = "select tbl_basket.tedad, tbl_basket.id as basketId, tbl_books.* from tbl_basket join tbl_books on tbl_basket.idbook = tbl_books.id where tbl_basket.cookie=?";
+        $cookie = self::getBasketCookie();
+        $param = [$cookie];
+        $result = $this->doSelect($sql, $param);
+
+        foreach ($result as $key => $value) {
+            $entInfo = $this->getEntInfo($value['identesharat']);
+            $result[$key]['entInfo'] = $entInfo;
+        }
+//tedad ro zarb nemikone...
+        $meghdarKolleTakhfif = 0;
+        foreach ($result as $key => $item) {
+            $price = intval($item['gheymat']);
+            $darsadTakhfif = intval($item['takhfif']);
+            $meghdarTakhfif = ($price * $darsadTakhfif)/100;
+            $tedad = intval($item['tedad']);
+            $meghdarTakhfifBaTedad = $meghdarTakhfif * $tedad;
+            $meghdarKolleTakhfif = $meghdarKolleTakhfif + $meghdarTakhfifBaTedad;
+        }
+
+        $priceTotalAll = 0;
+        foreach ($result as $item) {
+            $price = $item['gheymat'];
+            $tedad = $item['tedad'];
+            $priceTotal = $price * $tedad;
+            $priceTotalAll += $priceTotal;
+        }
+/*
+        $tedad = 0;
+        foreach ($result as $item){
+            $tedad = $tedad + $item['tedad'];
+        }*/
+        //print_r($result);
+        return [$result, $priceTotalAll, $meghdarKolleTakhfif];
+    }
+
+    function getEntInfo($ident)
+    {
+        $sql = "select * from tbl_entesharat where id=?";
+        $entInfo = $this->doSelect($sql, [$ident], 1);
+        return $entInfo;
+    }
+
+
     function doSelect($sql, $values = [], $fetch = '', $fetchStyle = PDO::FETCH_ASSOC)
     {
         $stmt = self::$conn->prepare($sql);

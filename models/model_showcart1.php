@@ -11,8 +11,8 @@ class model_showcart1 extends Model
 
     function getAddress()
     {
-        @self::sessionInit();
-        $iduser = self::sessionGet('userId');
+        @parent::sessionInit();
+        $iduser = parent::sessionGet('userId');
         $sql = "select * from tbl_user_address where iduser=?";
         $res = $this->doSelect($sql, [$iduser]);
         return $res;
@@ -21,8 +21,8 @@ class model_showcart1 extends Model
     function addToAddress($data, $addressId)
     {
 
-        @self::sessionInit();
-        $iduser = self::sessionGet('userId');
+        @parent::sessionInit();
+        $iduser = parent::sessionGet('userId');
         $nam = $data['nam'];
         $shomare = $data['shomare'];
         $state = $data['state'];
@@ -65,14 +65,14 @@ class model_showcart1 extends Model
     {
         $sql = "select * from tbl_user_address where id=?";
         $res = $this->doSelect($sql, [$id], 1);
-        @self::sessionInit();
-        self::sessionSet('chosen_address', serialize($res));
+        @parent::sessionInit();
+        parent::sessionSet('chosen_address', serialize($res));
     }
 
     function getTotalPriceOfPrevStep()
     {
-        @self::sessionInit();
-        $total_price = self::sessionGet('total_price');
+        @parent::sessionInit();
+        $total_price = parent::sessionGet('totPrice');
         return $total_price;
     }
 
@@ -80,8 +80,8 @@ class model_showcart1 extends Model
     {
         $sql = "select * from tbl_post_type where id=?";
         $res = $this->doSelect($sql, [$id], 1);
-        @self::sessionInit();
-        self::sessionSet('post_type', serialize($res));
+        @parent::sessionInit();
+        parent::sessionSet('post_type', serialize($res));
         $post_type_price = $res['hazine'];
         return $post_type_price;
     }

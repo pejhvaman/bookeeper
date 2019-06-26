@@ -180,7 +180,6 @@ $address = $data['address'];
     ?>
 </div>
 <script>
-
     function deleteAddress(id) {
         var addressId = id;
         var url = "showcart1/deleteaddress";
@@ -240,6 +239,7 @@ $address = $data['address'];
         //$(this).toggleClass('activeAddress');
         $('#sabad .select_but').removeClass('activeAddress');
         $(this).addClass('activeAddress');
+        chosenAddress();
     });
     $('#sabad table').eq(0).find('.select_but').addClass('activeAddress');
 
@@ -253,6 +253,4 @@ $address = $data['address'];
             console.log(msg);
         });
     }
-
-
 </script>
