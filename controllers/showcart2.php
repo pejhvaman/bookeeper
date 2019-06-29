@@ -14,30 +14,30 @@ class showcart2 extends Controller
         $this->view('showcart2/index', $data);
     }
 
-    function checkcode()
+    function checkcode($code='')
     {
-        if (isset($_POST['code'])){
+        /*if (isset($_POST['code'])){
             $code = $_POST['code'];
         }else{
             $code = '';
-        }
+        }*/
         $response = $this->model->checkCode($code);
 
         //$final_price = $this->model->calculateFinalPrice($code);
-        $msg = [$response];
-        echo json_encode($msg);
+
+        echo $response;
         //var_dump($response);
     }
 
-    function calculatefinalprice()
+    function calculatefinalprice($code='')
     {
-        if (isset($_POST['codeTakhfif'])){
+        /*if (isset($_POST['codeTakhfif'])){
             $code = $_POST['codeTakhfif'];
         }else {
             $code = '';
-        }
+        }*/
 
         $finalPrice = $this->model->calculateFinalPrice($code);
-        echo json_encode($finalPrice);
+        echo $finalPrice;
     }
 }
