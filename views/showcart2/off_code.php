@@ -58,37 +58,42 @@
     </span>
 </div>
 <script>
+    $('#code_input').css({"border": "2px solid orange"});
+    $('#code_input').attr('placeholder', 'کد تخفیف خود را وارد کنید...');
+
     function checkCode() {
         var code = $('#code_input').val();
-        var url = "showcart2/checkcode";
-        var data = {'code': code};
+        var url = "showcart2/checkcode/" + code;
+        var data = {};
         $.post(url, data, function (msg) {
-            //var finalPrice = parseInt(msg[1]);
-            var response = parseInt(msg[0]);
+
+            var response = parseInt(msg);
+            console.log(response);
             if (response != 0) {
-                $('#code_input').css({"border": "1px solid blue"});
+                $('#code_input').css({"border": "4px solid green"});
                 //$('#final_price').html(finalPrice);
-                var url = "showcart2/calculatefinalprice";
-                var data = {'codeTakhfif': code};
-                $.post(url, data, function (msg) {
-                   //alert(msg);
-                   // console.log(msg);
-                    $('#final_price').html(msg);
-                }, 'json');
-            } else {
-                // var codeInput = ;
-                $('#code_input').css({"border": "1px solid orange"});
-                $('#code_input').attr('placeholder','کد تخفیف خود را وارد کنید...');
-                var url = "showcart2/calculatefinalprice";
-                var data = {'codeTakhfif': code};
-                $.post(url, data, function (msg) {
-                    //alert(msg);
-                    // console.log(msg);
-                    $('#final_price').html(msg);
-                }, 'json');
+                calculateFinalPrice();
             }
-        }, 'json');
+            else {
+                // var codeInput = ;
+                $('#code_input').css({"border": "4px solid red"});
+                $('#code_input').attr('placeholder', 'کد تخفیف خود را صحیح وارد کنید...');
+                //calculateFinalPrice();
+            }
+        });
     }
 
-    checkCode();
+    function calculateFinalPrice() {
+
+        var code = $('#code_input').val();
+        var url = "showcart2/calculatefinalprice/" + code;
+        var data = {};
+        $.post(url, data, function (msg) {
+            //alert(msg);
+            // console.log(msg);
+            $('#final_price').html(msg);
+        });
+    }
+
+    calculateFinalPrice();
 </script>

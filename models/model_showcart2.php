@@ -17,7 +17,7 @@ class model_showcart2 extends Model
 
     function checkCode($code)
     {
-        $sql = "select * from tbl_takhfif where kod=?";
+        $sql = "select * from tbl_takhfif where kod=? and used=0";
         $res = $this->doSelect($sql, [$code]);
         if (sizeof($res) > 0) {
             return $res[0]['darsad'];
@@ -34,6 +34,7 @@ class model_showcart2 extends Model
         $totPrice = $basket[1];
 
         parent::sessionInit();
+        //$totPrice = parent::sessionGet('totPrice');
         $postTypeInfo = parent::sessionGet('post_type');
         $postTypeInfo = unserialize($postTypeInfo);
         $postPrice = $postTypeInfo['hazine'];
@@ -47,8 +48,16 @@ class model_showcart2 extends Model
 
 
         $finalPrice = $totPrice + $postPrice - $basketDiscountPrice - $totalPriceWithCode;
+        //self::sessionSet('totPrice',$finalPrice);
+        //setSessionForFinalPrice($finalPrice);
 
         return $finalPrice;
 
     }
+
+    /*function setSessionForFinalPrice($finalPrice)
+    {
+        parent::sessionInit();
+        parent::sessionSet('totPrice', $finalPrice);
+    }*/
 }
