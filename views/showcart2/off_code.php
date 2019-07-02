@@ -52,7 +52,7 @@
     <span>
                 با ثبت کد تخفیف، مبلغ کد تخفیف از “مبلغ قابل پرداخت” کسر می‌شود.
             </span>
-    <input id="code_input">
+    <input id="code_input" name="off_code">
     <span onclick="checkCode()" class="addBtn">
                 ثبت کد تخفیف
     </span>
@@ -60,6 +60,7 @@
 <script>
     $('#code_input').css({"border": "2px solid orange"});
     $('#code_input').attr('placeholder', 'کد تخفیف خود را وارد کنید...');
+    //$('#code_input').attr('value', '');
 
     function checkCode() {
         var code = $('#code_input').val();
@@ -68,7 +69,7 @@
         $.post(url, data, function (msg) {
 
             var response = parseInt(msg);
-            console.log(response);
+            //console.log(response);
             if (response != 0) {
                 $('#code_input').css({"border": "4px solid green"});
                 //$('#final_price').html(finalPrice);

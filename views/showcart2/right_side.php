@@ -43,14 +43,18 @@
         background: white url(public/images/check-mark1.png) no-repeat center;
     }
 
+    input[name=pay_type] {
+        display: none;
+    }
 </style>
 <div class="right_side">
     <div id="sabad">
 
         <table cellspacing="0" cellpadding="0">
             <tr>
-                <td width="50px">
+                <td class="choose_button" width="50px">
                     <span class="select_but"></span>
+                    <input type="checkbox" name="pay_type" value="1">
                 </td>
                 <td width="60px">
                     <i></i>
@@ -64,14 +68,21 @@
 
     </div>
     <?php
-    require ('off_code.php');
+    require('off_code.php');
     ?>
     <script>
+        $('#sabad table').eq(0).find('.select_but').addClass('activeAddress');
+        $('#sabad table').eq(0).find('input[name=pay_type]').attr('checked', true);
 
         $('#sabad .select_but').click(function () {
-            $(this).toggleClass('activeAddress');
-            /*$('#sabad .select_but').removeClass('activeAddress');
-            $(this).addClass('activeAddress');*/
+            //$(this).toggleClass('activeAddress');
+            $('#sabad .select_but').removeClass('activeAddress');
+            $(this).addClass('activeAddress');
+            var parentTag = $(this).parents('.choose_button');
+            var radioInputs = $('input[name=pay_type');
+            radioInputs.attr('checked', false);
+            var radioInput = parentTag.find('input[name=pay_type]');
+            radioInput.attr('checked', true);
         });
     </script>
 </div>

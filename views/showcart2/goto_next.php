@@ -44,8 +44,13 @@
         </p>
     </div>
     <div class="row_s">
-            <span class="addBtn">
+            <span onclick="submitFinalForm()" class="addBtn">
                 پرداخت و ثبت نهایی سفارش
             </span>
     </div>
 </div>
+<script>
+    function submitFinalForm() {
+        $('#final_form').submit();
+    }
+</script>
