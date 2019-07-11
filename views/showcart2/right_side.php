@@ -65,6 +65,21 @@
             </tr>
 
         </table>
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td class="choose_button" width="50px">
+                    <span class="select_but"></span>
+                    <input type="checkbox" name="pay_type" value="2">
+                </td>
+                <td width="60px">
+                    <i></i>
+                </td>
+                <td class="editendelete">
+                    کارت به کارت
+                </td>
+            </tr>
+
+        </table>
 
     </div>
     <?php

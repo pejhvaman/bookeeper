@@ -34,7 +34,7 @@ class Payment
         if ($Status == 100) {
             $Authority = $result['Authority'];
         }
-        $responseArray = ['Status' => $Status, 'Errors' => $Errors, 'Authority' => $Authority];
+        $responseArray = ['Status' => $Status, 'Error' => $Errors, 'Authority' => $Authority];
         return $responseArray;
     }
 
@@ -59,7 +59,7 @@ class Payment
         if ($Status == 100) {
             $RefID = $result['RefID'];
         }
-        $responseArray = ['Status' => $Status, 'Errors' => $Errors, 'RefID' => $RefID];
+        $responseArray = ['Status' => $Status, 'Error' => $Errors, 'RefID' => $RefID];
         return $responseArray;
     }
 

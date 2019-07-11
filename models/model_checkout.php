@@ -17,6 +17,7 @@ class model_checkout extends Model
         $result = $Payment->zarinpalVerify($Authority, $Amount);
         $Status = $result['Status'];
         $ErrorsArray =zarinpalErrors;
+        //echo "<h1>'$Status'</h1>";
         $Error = $ErrorsArray[$Status];
         $RefID = $result['RefID'];
         if($Status == 100){
@@ -24,7 +25,36 @@ class model_checkout extends Model
             $this->doQuery($sql,[$RefID, $Authority]);
         }
         $sql = "select * from tbl_order where zarinpal_authority=?";
-        $result = $this->doSelect($sql, [$Authority]);
+        $result = $this->doSelect($sql, [$Authority],1);
         return $result;
+    }
+
+    function getOrderInfo($order_id)
+    {
+        $sql = "select * from tbl_order where id=?";
+        $result = $this->doSelect($sql, [$order_id], 1);
+        return $result;
+    }
+
+    function payOnline($order_id)
+    {
+        $order_info = $this->getOrderInfo($order_id);
+        $pay_type = $order_info['pay_type'];
+        if($pay_type == 1){
+            $Amount = $order_info['amount'];
+            $Description = "خرید از پژوا بوک";
+            $Email = "pejhvaman@gmail.com";
+            $Mobile = $order_info['shomare_mobile'];
+            $Payment = new Payment;
+            $result = $Payment->zarinpalRequest($Amount, $Description, $Email, $Mobile);
+            $Status = $result['Status'];
+            $authority = $result['authority'];
+            $Error = $result['Error'];
+            if($Status == 100){
+                header('location: https://www.zarinpal.com/pg/StartPay/' . $authority);
+            }else{
+                header('location:'.URL.'checkout/showerror?error='.$Error.'&order_id='.$order_info['id']);
+            }
+        }//zarinpal
     }
 }
