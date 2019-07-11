@@ -35,6 +35,17 @@ class checkout extends Controller
         $data = ['error' => $error, 'order_id'=>$order_id];
         $this->view('checkout/showerror', $data, 0);
     }
+
+    function creditcard($order_id){
+
+        if(isset($_POST['day'])){
+            $this->model->updateCreditCard($_POST, $order_id);
+        }
+        $order_info = $this->model->getOrderInfo($order_id);
+        $data = ['order_info'=>$order_info];
+        $this->view('checkout/creditcard',$data);
+
+    }
 }
 
 ?>

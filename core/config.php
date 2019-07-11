@@ -2,6 +2,7 @@
 define('URL', 'http://127.0.0.1/pejhvabook/');
 define('zarinpalMerchantID', 'xxxx-xxxx-xxxx-xxxx');
 define('zarinpalcallBack', URL . 'checkout');
+define('mohlate_pardakht', 24);
 //$zarinpalErrorsArray = ;
 define('zarinpalErrors', [
     '-1' => 'اطلاعات ارسال شده ناقص است.',

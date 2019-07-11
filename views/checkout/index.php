@@ -222,6 +222,18 @@
         font-size: 13pt;
     }
 
+    .error {
+        border-radius: 4px;
+        border: 1px solid indianred;
+        text-align: center;
+        width: 100%;
+        font-family: sans;
+        float: right;
+        background: #eea2a6;
+        color: white;
+        font-size: 15pt;
+        margin-bottom: 5px;
+    }
 </style>
 
 <?php
@@ -230,6 +242,23 @@ $orderInfo = $data['orderInfo'];
 $basket = $orderInfo['sabad'];
 $basket = unserialize($basket);
 //print_r($basket);
+
+$vaziat_pardakht = $orderInfo['vaziat_pardakht'];
+$sabt_time = $orderInfo['sabt_time'];
+$sabt_time = intval($sabt_time);
+$gozashte = time() - $sabt_time;
+$mohalt = mohlate_pardakht * 3600;
+
+if ($gozashte > $mohalt) {
+
+    ?>
+    <div class="error">
+        این سفارش منقضی شده است. مهلت پرداخت
+        <?= mohlate_pardakht ?>
+        ساعت می باشد.
+    </div>
+    <?php
+}
 ?>
 <div id="sabad">
     <table cellspacing="0" cellpadding="0">
@@ -320,7 +349,8 @@ $basket = unserialize($basket);
         transition: background-color 300ms ease-in;
         float: left;
     }
-    .btnMain:first-child{
+
+    .btnMain:first-child {
         margin-right: 3px;
     }
 
@@ -340,22 +370,27 @@ $basket = unserialize($basket);
 <div class="row">
     وضعیت پرداخت :
     <?php
-    $vaziat_pardakht = $orderInfo['vaziat_pardakht'];
     if ($vaziat_pardakht == 1) {
         echo "پرداخت شده";
     } else {
-        echo "در انتظار پرداخت";
+        if ($gozashte <= $mohalt) {
+            echo "در انتظار پرداخت";
+            ?>
+            <div class="btn_for_pay">
+                <a class="btnMain" href="checkout/payonline/<?= $orderInfo['id'] ?>">
+                    پرداخت آنلاین
+                </a>
+                <a class="btnMain" href="checkout/creditcard/<?= $orderInfo['id'] ?>">
+                    کارت به کارت
+                </a>
+            </div>
+
+            <?php
+        }else{
+            echo 'منقضی شده';
+        }
     }
     ?>
-    <div class="btn_for_pay">
-        <a class="btnMain" href="checkout/payonline/<?= $orderInfo['id'] ?>">
-            پرداخت آنلاین
-        </a>
-        <a class="btnMain" href="">
-            کارت به کارت
-        </a>
-    </div>
-
     <hr>
     <?php
     $post_type = $orderInfo['post_type'];

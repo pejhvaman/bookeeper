@@ -109,11 +109,12 @@ class model_showcart2 extends Model
             $before_pay = $authority;
 
         }
-        $sql = 'insert into tbl_order (esm_girande, shomare_mobile, kod_posti, ostan, shahr, adres_girande, sabad, amount, post_type, user_id, zarinpal_authority, vaziat_sefaresh, pay_type) values (?,?,?,?,?,?,?,?,?,?,?,?,?)';
-        $params = [$esm_girande, $shomare_mobile, $kod_posti, $ostan, $shahr, $adres_girande, $sabad, $amount, $postTypeId, $user_id, $before_pay, 1, $pay_type];
+        $sabt_time = time();
+        $sql = 'insert into tbl_order (esm_girande, shomare_mobile, kod_posti, ostan, shahr, adres_girande, sabad, amount, post_type, user_id, zarinpal_authority, vaziat_sefaresh, pay_type, sabt_time) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+        $params = [$esm_girande, $shomare_mobile, $kod_posti, $ostan, $shahr, $adres_girande, $sabad, $amount, $postTypeId, $user_id, $before_pay, 1, $pay_type, $sabt_time];
         $this->doQuery($sql, $params);
 
-        if($pay_type == 1){
+        if ($pay_type == 1) {
             if ($status == 100) {
                 header('location: https://www.zarinpal.com/pg/StartPay/' . $authority);
             } else {
@@ -121,7 +122,7 @@ class model_showcart2 extends Model
                 header('location:' . URL . 'showcart2/index/' . $status);
             }
         }
-        if ($pay_type == 2){
+        if ($pay_type == 2) {
             $sql = "select * from tbl_order order by id desc limit 1";
             $result = $this->doSelect($sql, [], 1);
             header('location:' . URL . 'checkout/index/' . $result['id']);
