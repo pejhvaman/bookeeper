@@ -41,6 +41,10 @@ class model_checkout extends Model
     {
         $order_info = $this->getOrderInfo($order_id);
         $pay_type = $order_info['pay_type'];
+        if($pay_type ==2){
+            $sql = "update tbl_order set pay_type=1 where id=?";
+            $this->doQuery($sql, [$order_id]);
+        }
         if ($pay_type == 1) {
             $Amount = $order_info['amount'];
             $Description = "خرید از پژوا بوک";
