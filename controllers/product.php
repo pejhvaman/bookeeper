@@ -7,10 +7,10 @@ class product extends Controller
 
     }
 
-    function index($id)
+    function index($id, $activeTab = '')
     {
         $bookInfo = $this->model->productInfo($id);
-        $data = ['bookInfo' => $bookInfo];
+        $data = ['bookInfo' => $bookInfo, 'activeTab' => $activeTab];
         $this->view('product/index', $data);
     }
 
@@ -54,6 +54,7 @@ class product extends Controller
         $dislikeCount = $_POST['dislikeCount'];
         $this->model->updateDisLikeCount($hasClass, $idbook, $dislikeCount);
     }
+
     function addtobasket($idbook)
     {
         $this->model->addToBasket($idbook);

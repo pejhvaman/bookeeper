@@ -1,4 +1,7 @@
-
+<?php
+$user_info = $data['user_info'];
+//print_r($user_info);
+?>
 <div class="data_box1">
     <div class="data_title">
         اطلاعات کاربری
@@ -11,7 +14,7 @@
                             نام و نام خانوادگی:
                         </span>
                     <span class="value_data">
-                            پژمان یزدان خواه
+                            <?= $user_info['nam'] ?>
                         </span>
                 </td>
                 <td>
@@ -19,7 +22,7 @@
 ایمیل:
                         </span>
                     <span class="value_data">
-                    pejhman@gmail.com
+                   <?= $user_info['email'] ?>
                     </span>
                 </td>
                 <td>
@@ -27,7 +30,7 @@
 کد ملی:
                         </span>
                     <span class="value_data">
-12345678889
+<?= $user_info['code_melli'] ?>
                     </span>
                 </td>
             </tr>
@@ -37,7 +40,7 @@
 شماره تلفن ثابت:
                         </span>
                     <span class="value_data">
-021000000025
+<?= $user_info['tel'] ?>
                     </span>
                 </td>
                 <td>
@@ -45,7 +48,7 @@
 شماره تلفن  همراه:
                         </span>
                     <span class="value_data">
-093855557777
+<?= $user_info['mobile'] ?>
                     </span>
                 </td>
                 <td>
@@ -53,9 +56,19 @@
 تاریخ تولد:
                         </span>
                     <span class="value_data">
-1375/10/21
+<?= $user_info['tavalod'] ?>
                     </span>
                 </td>
+            <tr>
+                <td colspan="3">
+                        <span class="title_data">
+آدرس :
+                        </span>
+                    <span class="value_data">
+<?= $user_info['address'] ?>
+                    </span>
+                </td>
+            </tr>
             </tr>
             <tr>
                 <td colspan="3" style="height: 70px">

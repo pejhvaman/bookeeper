@@ -72,6 +72,7 @@
         width: 100%;
         float: right;
         margin-bottom: 20px;
+        font-family: sans;
     }
 </style>
 
@@ -80,5 +81,4 @@
     require ('function_report.php');
     require ('tabs.php');
     ?>
-
 

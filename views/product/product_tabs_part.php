@@ -37,13 +37,13 @@
 </style>
 <div id="tab_part">
     <ul>
-        <li>
+        <li class="property">
             مشخصات
         </li>
-        <li>
+        <li class="nazar">
             نظرات کاربران
         </li>
-        <li>
+        <li class="soal">
             پرسش و پاسخ
         </li>
     </ul>

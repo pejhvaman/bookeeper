@@ -132,17 +132,17 @@ $comments = $data;
     <?php
     foreach ($comments as $comment) {
         ?>
-        <div class="comments">
+        <div id="comment<?= $comment['id'] ?>" class="comments">
             <div class="commenter">
                         <span class="by_who_when">
                             توسط
-<?= $comment['user']; ?>
+<?= $comment['nam']; ?>
                             در تاریخ
-                            <?= $comment['tarikh'] ?>
+                            <?= $comment['sabt_time'] ?>
                         </span>
                 <div class="likeOrNot">
                             <span class="dislike">
-                                <span data-dislikeCount="<?= $comment['dislike_count'] ?>" data-idbook="<?= $comment['idbook'] ?>" class="dislike_icon"></span>
+                                <span data-dislikeCount="<?= $comment['dislike_count'] ?>" data-idbook="<?= $comment['product_id'] ?>" class="dislike_icon"></span>
                                 <span class="dislike_count">
                                     <?php
                                     echo $comment['dislike_count']
@@ -150,7 +150,7 @@ $comments = $data;
                                 </span>
                             </span>
                     <span class="like">
-                                <span data-likeCount="<?= $comment['like_count'] ?>" data-idbook="<?= $comment['idbook'] ?>" class="like_icon"></span>
+                                <span data-likeCount="<?= $comment['like_count'] ?>" data-idbook="<?= $comment['product_id'] ?>" class="like_icon"></span>
                                 <span class="like_count">
                                     <?php
                                     echo $comment['like_count']

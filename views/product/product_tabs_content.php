@@ -24,10 +24,14 @@
 <script>
 
     $('#tab_part li').click(function () {
+        changeTab($(this));
+    });
+
+    function changeTab(tag) {
         $('#tab_part li').removeClass('activeTab');
-        $(this).addClass('activeTab');
+        tag.addClass('activeTab');
         $('#tabs section').fadeOut(100);
-        var tabNum = $(this).index();
+        var tabNum = tag.index();
         var sectionSelected = $('#tabs section').eq(tabNum);
 
         var url = '<?= URL ?>product/tab/<?= $bookInfo['id']; ?>';
@@ -36,6 +40,8 @@
             sectionSelected.html(msg);
         });
         sectionSelected.fadeIn(100);
-    });
+    }
+
+    $('.<?= $data['activeTab'] ?>').trigger('click');
 
 </script>

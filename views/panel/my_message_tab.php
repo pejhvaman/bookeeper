@@ -2,6 +2,7 @@
     #my_message {
         width: 100%;
         float: right;
+        font-family: sans;
     }
 
     #my_message table {
@@ -33,7 +34,16 @@
     #my_message table tr:first-child {
         background: #fbfbfb;
     }
+    .message_text {
+        height: 100px;
+        width: 100%;
+        overflow-y: scroll;
+    }
 </style>
+<?php
+$messages = $data['messages'];
+?>
+
 <section id="my_message">
     <table cellspacing="0" cellpadding="0">
         <tr>
@@ -44,31 +54,40 @@
                 عنوان
             </td>
             <td>
-                تاریخ
-            </td>
-            <td>
                 متن
             </td>
             <td>
                 وضعیت
             </td>
         </tr>
-        <tr>
-            <td>
-                1
-            </td>
-            <td>
-                پیام سفارش
-            </td>
-            <td>
-                10 مهر 97
-            </td>
-            <td>
-                سفارش در حال تایید است
-            </td>
-            <td>
-                در حال تایید
-            </td>
-        </tr>
+        <?php
+        foreach ($messages as $key => $message) {
+            ?>
+            <tr>
+                <td>
+                    <?= $key + 1 ?>
+                </td>
+                <td>
+                    <?= $message['title'] ?>
+                </td>
+                <td>
+                    <p class="message_text">
+                        <?= $message['matn'] ?>
+                    </p>
+                </td>
+                <td>
+                    <?php
+                    if($message['status'] == 0){
+                        echo 'خوانده نشده';
+                    }
+                    elseif ($message['status'] == 1){
+                        echo 'خوانده شده';
+                    }
+                    ?>
+                </td>
+            </tr>
+            <?php
+        }
+        ?>
     </table>
 </section>

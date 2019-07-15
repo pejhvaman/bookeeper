@@ -84,7 +84,8 @@ class model_product extends Model
 
     function getComments($idbook)
     {
-        $sql = "select * from tbl_user_comments where idbook=?";
+        //$sql = "select * from tbl_comment where product_id=?";
+        $sql = "select tbl_comment.*, tbl_users.nam from tbl_comment join tbl_users on tbl_comment.user_id=tbl_users.id where tbl_comment.product_id=?";
         $result = $this->doSelect($sql, [$idbook]);
         return $result;
     }
@@ -133,7 +134,7 @@ class model_product extends Model
         if ($hasClass == 0) {
             $new_likeCount = $likeCount - 1;
         }
-        $sql = "update tbl_user_comments set like_count = " . $new_likeCount . " where idbook=?";
+        $sql = "update tbl_comment set like_count = " . $new_likeCount . " where product_id=?";
         $stmt = self::$conn->prepare($sql);
         $stmt->bindValue(1, $idbook);
         $stmt->execute();
@@ -147,7 +148,7 @@ class model_product extends Model
         if ($hasClass == 0) {
             $new_dislikeCount = $dislikeCount - 1;
         }
-        $sql = "update tbl_user_comments set dislike_count = " . $new_dislikeCount . " where idbook=?";
+        $sql = "update tbl_comment set dislike_count = " . $new_dislikeCount . " where product_id=?";
         $stmt = self::$conn->prepare($sql);
         $stmt->bindValue(1, $idbook);
         $stmt->execute();

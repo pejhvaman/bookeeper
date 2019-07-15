@@ -2,6 +2,7 @@
     #tab_part {
         width: 100%;
         float: right;
+        font-family: sans;
     }
 
     #tab_part ul {
