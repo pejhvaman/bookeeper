@@ -1,3 +1,6 @@
+<?php
+$activeTab = $data['activeTab'];
+?>
 <style>
     #tab_part {
         width: 100%;
@@ -35,7 +38,7 @@
 </style>
 <div id="tab_part">
     <ul>
-        <li>
+        <li class="<?php if($activeTab == 'message'){echo 'activeTab';} ?>">
             پیغام های من
         </li>
         <li>
@@ -47,7 +50,7 @@
         <li>
             نظرات من
         </li>
-        <li>
+        <li class="<?php if($activeTab == 'code'){echo 'activeTab';} ?>">
             کدهای تخفیف
         </li>
     </ul>

@@ -14,7 +14,7 @@ class panel extends Controller
         }
     }
 
-    function index()
+    function index($activeTab = 'message')
     {
         $user_info = $this->model->getUserInfo();
         $user_orders_stat = $this->model->getStat();
@@ -23,7 +23,8 @@ class panel extends Controller
         $user_orders = $this->model->getUserOrders();
         $user_favorites = $this->model->getFav();
         $user_comments = $this->model->getUserComments();
-        $data = ['user_info' => $user_info, 'orders_stat' => $user_orders_stat, 'messages' => $user_messages, 'orders' => $user_orders, 'favorites' => $user_favorites, 'comments' => $user_comments];
+        $codes = $this->model->getUserCodes();
+        $data = ['user_info' => $user_info, 'orders_stat' => $user_orders_stat, 'messages' => $user_messages, 'orders' => $user_orders, 'favorites' => $user_favorites, 'comments' => $user_comments, 'codes' => $codes, 'activeTab' => $activeTab];
         $this->view('panel/index', $data);
     }
 
@@ -39,5 +40,36 @@ class panel extends Controller
         $comment_id = $_POST['comment_id'];
         $remain = $this->model->deleteComment($comment_id);
         echo json_encode($remain);
+    }
+
+    function savecode()
+    {
+        if (isset($_POST['code'])) {
+            $this->model->saveCode($_POST);
+        }
+    }
+
+    function profile()
+    {
+        //this is for display current info:
+        $user_info = $this->model->getUserInfo();
+        $data = ['user_info' => $user_info];
+        $this->view('panel/profile', $data);
+    }
+
+    function editprofile()
+    {
+        //this is for update changes in profile info:
+        $data = $_POST;
+        $this->model->editProfile($data);
+        header('location:'.URL.'panel/profile');
+    }
+
+    function changepass()
+    {
+        if(isset($_POST['current_pass'])){
+            $this->model->changePass($_POST);
+        }
+        $this->view('panel/changepass');
     }
 }

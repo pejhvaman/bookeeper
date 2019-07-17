@@ -17,7 +17,7 @@ class model_showcart2 extends Model
 
     function checkCode($code)
     {
-        $sql = "select * from tbl_takhfif where kod=? and used=0";
+        $sql = "select * from tbl_takhfif where kod=?";
         $res = $this->doSelect($sql, [$code]);
         if (sizeof($res) > 0) {
             return $res[0]['darsad'];
@@ -110,9 +110,11 @@ class model_showcart2 extends Model
 
         }
         $sabt_time = time();
-        $sql = 'insert into tbl_order (esm_girande, shomare_mobile, kod_posti, ostan, shahr, adres_girande, sabad, amount, post_type, user_id, zarinpal_authority, vaziat_sefaresh, pay_type, sabt_time) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-        $params = [$esm_girande, $shomare_mobile, $kod_posti, $ostan, $shahr, $adres_girande, $sabad, $amount, $postTypeId, $user_id, $before_pay, 1, $pay_type, $sabt_time];
+        $sql = 'insert into tbl_order (esm_girande, shomare_mobile, kod_posti, ostan, shahr, adres_girande, sabad, amount, post_type, user_id, zarinpal_authority, vaziat_sefaresh, pay_type, sabt_time, code_takhfif) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+        $params = [$esm_girande, $shomare_mobile, $kod_posti, $ostan, $shahr, $adres_girande, $sabad, $amount, $postTypeId, $user_id, $before_pay, 1, $pay_type, $sabt_time, $code];
         $this->doQuery($sql, $params);
+
+        /*$sql2 = "update tbl_takhfif set ";*/
 
         if ($pay_type == 1) {
             if ($status == 100) {

@@ -44,7 +44,7 @@
 $messages = $data['messages'];
 ?>
 
-<section id="my_message">
+<section id="my_message" style="<?php if($activeTab == 'message'){echo 'display:block;';} ?>">
     <table cellspacing="0" cellpadding="0">
         <tr>
             <td>

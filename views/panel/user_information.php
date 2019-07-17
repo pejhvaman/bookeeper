@@ -1,3 +1,26 @@
+<style>
+    .btn-pejhva-primary {
+        display: block;
+        width: 100px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        float: left;
+        padding: 0 10px;
+        background: #00b189;
+        border-radius: 4px;
+        font-family: sans;
+        font-size: 14pt;
+        color: whitesmoke;
+        cursor: pointer;
+        transition: 500ms;
+        margin-left: 50px;
+    }
+
+    .btn-pejhva-primary:hover {
+        opacity: 0.7;
+    }
+</style>
 <?php
 $user_info = $data['user_info'];
 //print_r($user_info);
@@ -72,10 +95,12 @@ $user_info = $data['user_info'];
             </tr>
             <tr>
                 <td colspan="3" style="height: 70px">
-                        <span class="addBtn"
-                              style="width: 110px;height: 36px;line-height: 36px;margin: auto;font-size: 11.5pt">
-                            ویرایش اطلاعات
-                        </span>
+                    <a href="panel/changepass" class="btn-pejhva-primary" style="background: #f35048;">
+                        تغییر رمز عبور
+                    </a>
+                    <a href="panel/profile" class="btn-pejhva-primary">
+                        ویرایش اطلاعات
+                    </a>
                 </td>
             </tr>
         </table>

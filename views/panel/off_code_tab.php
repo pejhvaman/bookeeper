@@ -2,6 +2,7 @@
     #off_code {
         width: 100%;
         float: right;
+        font-family: sans;
     }
 
     #off_code > table {
@@ -71,15 +72,15 @@
         border-radius: 4px;
     }
 </style>
-<section id="off_code">
+<section id="off_code" style="<?php if($activeTab == 'code'){echo 'display:block;';} ?>">
     <div id="add_off_code">
         <p>
             افزودن کد تخفیف:
         </p>
-        <input>
-        <span class="addBtn">
-                        افزودن
-                    </span>
+        <input id="code_takhfif" name="code">
+        <span onclick="saveCode()" class="addBtn">
+                 افزودن
+            </span>
     </div>
     <table cellspacing="0" cellpadding="0">
         <tr>
@@ -90,22 +91,10 @@
                 کد تخفیف
             </td>
             <td>
-                شرح
-            </td>
-            <td>
                 تاریخ ثبت
             </td>
             <td>
                 تاریخ انقضا
-            </td>
-            <td>
-                اعتبار اولیه
-            </td>
-            <td>
-                اعتبار مصرفی
-            </td>
-            <td>
-                مانده
             </td>
             <td>
                 وضعیت
@@ -114,61 +103,77 @@
                 جزئیات
             </td>
         </tr>
-        <tr>
-            <td>
-                1
-            </td>
-            <td>
-                pejhva1
-            </td>
-            <td>
-                بن تخفیف سفارش شما
-            </td>
-            <td>
-                1397/7/18
-            </td>
-            <td>
-                1397/7/30
-            </td>
-            <td>
-                3
-            </td>
-            <td>
-                0
-            </td>
-            <td>
-                3
-            </td>
-            <td>
-                معتبر
-            </td>
-            <td>
-                <span class="more_detail"></span>
-            </td>
-        </tr>
-        <tr class="more_detail_order">
-            <td colspan="10">
-                <div class="all_detail">
-                    <table cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td>
-                                سفارش
-                            </td>
-                            <td>
-                                تاریخ خرید
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                نام کتاب
-                            </td>
-                            <td>
-                                x
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
+        <?php
+        $codes = $data['codes'];
+        $i = 1;
+        foreach ($codes as $code) {
+            ?>
+            <tr>
+                <td>
+                    <?= $i ?>
+                </td>
+                <td>
+                    <?= $code['kod'] ?>
+                </td>
+                <td>
+                    <?= $code['sabt_time'] ?>
+                </td>
+                <td>
+                    <?= $code['end_time'] ?>
+                </td>
+                <td>
+                    <?= $code['status'] ?>
+                </td>
+                <td>
+                    <span class="more_detail"></span>
+                </td>
+            </tr>
+            <tr class="more_detail_order">
+                <td colspan="10">
+                    <div class="all_detail">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td>
+                                    سفارش
+                                </td>
+                                <td>
+                                    تاریخ خرید
+                                </td>
+                            </tr>
+                            <?php
+                            $sabad = $code['order_info']['sabad'];
+                            $sabad = unserialize($sabad);
+
+                            foreach ($sabad as $item) {
+                                ?>
+                                <tr>
+                                    <td>
+                                        <?= $item['esm'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $code['order_info']['sabt_time_sh'] ?>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <?php
+            $i++;
+        }
+        ?>
     </table>
 </section>
+<script>
+    function saveCode() {
+        var code = $('#code_takhfif').val();
+        var url = 'panel/savecode';
+        var data = {'code': code};
+        $.post(url, data, function (msg) {
+            window.location = 'panel/index/code';
+        });
+    }
+</script>

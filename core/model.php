@@ -13,6 +13,8 @@ class Model
         $utfArray = [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES "utf8"'];
         self::$conn = new PDO('mysql:host=' . $servername . ';dbname=' . $dbname, $username, $password, $utfArray);
         self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //
+        require_once ('public/jdf/jdf.php');
     }
 
     function getBasket()
@@ -201,5 +203,10 @@ class Model
         return $cookie;
     }
 
+    public static function jalaliDate($format = 'Y/n/j')
+    {
+        $date = jdate($format);
+        return $date;
+    }
 
 }
