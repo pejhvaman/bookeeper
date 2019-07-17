@@ -1,5 +1,5 @@
 <?php
-$active_menu = 'product';
+$active_menu = 'order';
 require('views/admin/rightSide.php');
 ?>
 <style>
@@ -43,51 +43,9 @@ require('views/admin/rightSide.php');
         border-bottom: unset;
     }
 
-    /*.menuTable input[type = checkbox] {
-
-    }*/
-
     .selectTik {
         position: relative;
         text-align: center;
-    }
-
-    .checkBoxManual {
-        background: url(public/images/tikgray.png) no-repeat center;
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        position: absolute;
-        right: 40%;
-        transform: translate(-50%, -50%);
-        cursor: pointer;
-    }
-
-    .checkBoxManual:hover {
-        opacity: .6;
-    }
-
-    .selectCheck {
-        background: url(public/images/tikdone.png) no-repeat center;
-    }
-
-    .lookSub {
-        position: relative;
-    }
-
-    .lookSubIcon {
-        display: inline-block;
-        width: 32px;
-        height: 32px;
-        cursor: pointer;
-        background: url(public/images/look.png) no-repeat center;
-        right: 40%;
-        position: absolute;
-        transform: translate(-50%, -50%);
-    }
-
-    .lookSubIcon:hover {
-        opacity: .6;
     }
 
     .addBtn, .deleteBtn {
@@ -121,7 +79,7 @@ require('views/admin/rightSide.php');
         position: relative;
     }
 
-    .editIcon {
+    .detailIcon {
         display: block;
         width: 24px;
         height: 24px;
@@ -131,7 +89,7 @@ require('views/admin/rightSide.php');
         transform: translate(-50%, -50%);
     }
 
-    .editIcon:hover {
+    .detailIcon:hover {
         opacity: .6;
     }
 
@@ -160,18 +118,15 @@ require('views/admin/rightSide.php');
     }
 </style>
 <?php
-$books = $data['books'];
+$orders = $data['orders'];
 ?>
 <div class="leftSide sans font_gray">
     <div class="menuContent">
         <h2 class="font_gray">
-            مدیریت محصولات
+            مدیریت سفارشات
         </h2>
 
         <hr>
-        <a class="addBtn" href="adminproduct/addproduct/">
-            افزودن
-        </a>
         <a onclick="submitForm();" class="deleteBtn">
             حذف
         </a>
@@ -179,62 +134,56 @@ $books = $data['books'];
 
             <table class="menuTable sans font_gray" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td>ردیف</td>
-                    <td>عنوان</td>
-                    <td>نویسنده</td>
-                    <td>مترجم</td>
-                    <td>قیمت</td>
-                    <td>تخفیف</td>
-                    <td>مشخصات</td>
-                    <td>ویرایش</td>
+                    <td>کد</td>
+                    <td>تاریخ ثبت</td>
+                    <td>نام گیرنده</td>
+                    <td>مبلغ کل</td>
+                    <td>استان</td>
+                    <td>شهر</td>
+                    <td>جزئیات</td>
                     <td>انتخاب</td>
                 </tr>
                 <?php
-                foreach ($books as $key => $book) {
+                foreach ($orders as $key => $order) {
                     ?>
                     <tr>
                         <td>
                             <?php
-                            echo $key + 1;
+                            echo $order['id'];
                             ?>
                         </td>
                         <td>
                             <?php
-                            echo $book['esm'];
+                            echo $order['sabt_time'];
                             ?>
                         </td>
                         <td>
                             <?php
-                            echo $book['nevisande'];
+                            echo $order['esm_girande'];
                             ?>
                         </td>
                         <td>
                             <?php
-                            echo $book['motarjem'];
+                            echo number_format($order['amount']);
                             ?>
                         </td>
                         <td>
                             <?php
-                            echo $book['gheymat'] . 'تومان';
+                            echo $order['ostan'];
                             ?>
                         </td>
                         <td>
                             <?php
-                            echo $book['discount_price'] . "تومان";
+                            echo $order['shahr'];
                             ?>
                         </td>
                         <td class="tdvaled">
-                            <a href="adminproduct/property/<?php echo $book['id']; ?>">
-                                <i class="viewproperty"></i>
-                            </a>
-                        </td>
-                        <td class="tdvaled">
-                            <a href="adminproduct/addproduct/<?= $book['id'] ?>">
-                                <i class="editIcon"></i>
+                            <a href="adminorder/detail/<?= $order['id'] ?>">
+                                <i class="detailIcon"></i>
                             </a>
                         </td>
                         <td class="selectTik">
-                            <input name="ids[]" value="<?= $book['id'] ?>" type="checkbox">
+                            <input name="ids[]" value="<?= $order['id'] ?>" type="checkbox">
                         </td>
                     </tr>
                     <?php

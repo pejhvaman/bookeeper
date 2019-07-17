@@ -109,7 +109,7 @@ class model_showcart2 extends Model
             $before_pay = $authority;
 
         }
-        $sabt_time = time();
+        $sabt_time = self::jalaliDate();
         $sql = 'insert into tbl_order (esm_girande, shomare_mobile, kod_posti, ostan, shahr, adres_girande, sabad, amount, post_type, user_id, zarinpal_authority, vaziat_sefaresh, pay_type, sabt_time, code_takhfif) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
         $params = [$esm_girande, $shomare_mobile, $kod_posti, $ostan, $shahr, $adres_girande, $sabad, $amount, $postTypeId, $user_id, $before_pay, 1, $pay_type, $sabt_time, $code];
         $this->doQuery($sql, $params);

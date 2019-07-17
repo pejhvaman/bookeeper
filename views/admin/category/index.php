@@ -1,4 +1,5 @@
 <?php
+$active_menu = 'category';
 require('views/admin/rightSide.php');
 ?>
 <style>
