@@ -33,6 +33,13 @@ class adminorder extends Controller
         $data = ['orderInfo' => $order_info];
         $this->view('admin/order/factor', $data, 0);
     }
+
+    function deleteorder()
+    {
+        $ids = $_POST['ids'];
+        $this->model->deleteOrder($ids);
+        header('location:' . URL . 'adminorder');
+    }
 }
 
 ?>

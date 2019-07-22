@@ -37,7 +37,13 @@ class model_adminorder extends Model
         header('location:' . URL . 'adminorder/detail/' . $order_id);
     }
 
-
+    function deleteOrder($ids)
+    {
+        //print_r($ids);
+        $ids = join(',', $ids);
+        $sql = "delete from tbl_order where id in (" . $ids . ")";
+        $this->doQuery($sql);
+    }
 }
 
 ?>

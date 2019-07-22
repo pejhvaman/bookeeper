@@ -130,7 +130,7 @@ $orders = $data['orders'];
         <a onclick="submitForm();" class="deleteBtn">
             حذف
         </a>
-        <form action="adminproduct/deleteproduct" method="post">
+        <form action="adminorder/deleteorder" method="post">
 
             <table class="menuTable sans font_gray" cellpadding="0" cellspacing="0">
                 <tr>
