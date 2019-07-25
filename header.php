@@ -58,6 +58,50 @@
         margin: 0 auto;
         background: white;
     }
+    .btn-pejhva-primary {
+        display: block;
+        width: 100px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        float: left;
+        padding: 0 10px;
+        background: #00b189;
+        border-radius: 4px;
+        font-family: sans;
+        font-size: 14pt;
+        color: whitesmoke;
+        cursor: pointer;
+        transition: 500ms;
+        margin-left: 50px;
+    }
+
+    .btn-pejhva-primary:hover {
+        opacity: 0.7;
+    }
+
+    .btn-pejhva-secondary {
+        display: block;
+        width: 98px;
+        height: 38px;
+        line-height: 40px;
+        text-align: center;
+        float: left;
+        padding: 0 10px;
+        background: white;
+        border: 1px solid #9a9a9a;
+        border-radius: 4px;
+        font-family: sans;
+        font-size: 14pt;
+        color: #3f3f3f;
+        cursor: pointer;
+        transition: 500ms;
+        margin-left: 50px;
+    }
+
+    .btn-pejhva-secondary:hover {
+        opacity: 0.7;
+    }
 
     #header_top {
         width: 100%;

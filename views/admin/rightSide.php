@@ -66,5 +66,19 @@
                 مدیریت سفارشات
             </a>
         </li>
+        <li class="menus <?php if ($active_menu == 'stat') {
+            echo 'activeMenu';
+        } ?>">
+            <a href="adminstat/index">
+                گزارشات
+            </a>
+        </li>
+        <li class="menus <?php if ($active_menu == 'comment') {
+            echo 'activeMenu';
+        } ?>">
+            <a href="admincomment/index">
+                مدیریت نظرات
+            </a>
+        </li>
     </ul>
 </div>
