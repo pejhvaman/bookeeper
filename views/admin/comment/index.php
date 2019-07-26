@@ -154,14 +154,10 @@ $comments = $data['comments'];
                             ?>
                         </td>
                         <td>
-                            <?php
-                            echo $comment['title'];
-                            ?>
+                            <input type="text" name="title<?= $comment['id'] ?>" value="<?= $comment['title'] ?>">
                         </td>
                         <td>
-                            <?php
-                            echo $comment['matn'];
-                            ?>
+                            <textarea name="body<?= $comment['id'] ?>" id="" cols="50" rows="10"><?= $comment['matn'] ?></textarea>
                         </td>
                         <td class="selectTik">
                             <input name="ids[]" value="<?= $comment['id'] ?>" type="checkbox">

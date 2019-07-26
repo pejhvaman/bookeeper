@@ -1,8 +1,14 @@
 <?php
-define('URL', 'http://127.0.0.1/pejhvabook/');
-define('zarinpalMerchantID', 'xxxx-xxxx-xxxx-xxxx');
+$model = new Model;
+$options = Model::getOptions();
+
+define('URL', $options['root']);
+define('zarinpalMerchantID', $options['zarinpalMID']);
 define('zarinpalcallBack', URL . 'checkout');
-define('mohlate_pardakht', 24);
+define('mohlate_pardakht', $options['mohlate_pardakht']);
+define('body_color', $options['body_color']);
+define('menu_color', $options['menu_color']);
+
 //$zarinpalErrorsArray = ;
 define('zarinpalErrors', [
     '-1' => 'اطلاعات ارسال شده ناقص است.',

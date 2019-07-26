@@ -8,7 +8,7 @@
     <script src="public/js/jquery.flipTimer.js"></script>
     <link href="public/css/flipTimer.css" rel="stylesheet">
 </head>
-<body style="margin: 0;background: #f5f5f5">
+<body style="margin: 0;background: #<?= body_color ?>">
 <style>
     @font-face {
         font-family: 'sans';
@@ -60,8 +60,6 @@
     }
     .btn-pejhva-primary {
         display: block;
-        width: 100px;
-        height: 40px;
         line-height: 40px;
         text-align: center;
         float: left;
@@ -382,7 +380,7 @@
     nav {
         width: 100%;
         height: 42px;
-        background: rgba(135, 42, 97, 0.75);
+        background: #<?= menu_color ?>;
         border-bottom: 4px solid rgba(135, 42, 97, 0.91); /*d7e2eb*/
         font-family: sans;
         z-index: 4;

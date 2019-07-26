@@ -31,9 +31,10 @@ class model_index extends Model
         //MANZUR AZ zamane_vijhe HAMAN ZAMANR SHURUE TAKHFIF VIJHE AST...
         $specialTime = $firstRow['zamane_vijhe'];
 
+        ///inja az Model::getOption estefadekon
         $sql = 'select * from tbl_option where setting="special_time"';
         $result2 = $this->doSelect($sql, [], 1);
-        $special_duration = $result2['value'];
+        $special_duration = $result2['value'] * 3600;
 
         $end_time = $specialTime + $special_duration;
         date_default_timezone_set('Asia/Tehran');

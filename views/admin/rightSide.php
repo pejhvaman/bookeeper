@@ -80,5 +80,12 @@
                 مدیریت نظرات
             </a>
         </li>
+        <li class="menus <?php if ($active_menu == 'setting') {
+            echo 'activeMenu';
+        } ?>">
+            <a href="adminsetting/index">
+                مدیریت تنظیمات
+            </a>
+        </li>
     </ul>
 </div>

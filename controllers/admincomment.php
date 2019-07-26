@@ -16,8 +16,7 @@ class admincomment extends Controller
 
     function confirm()
     {
-        $ids = $_POST['ids'];
-        $this->model->confirm($ids);
+        $this->model->confirm($_POST);
         header('location:' . URL . 'admincomment');
     }
 

@@ -33,7 +33,7 @@ class model_addcomment extends Model
         $matn = $data['nazar'];
         $title = $data['title'];
 
-        $sabt_time = time();
+        $sabt_time = Model::jalaliDate();
 
         $result = $this->getCommentInfo($pro_id);
 
