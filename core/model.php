@@ -14,7 +14,7 @@ class Model
         self::$conn = new PDO('mysql:host=' . $servername . ';dbname=' . $dbname, $username, $password, $utfArray);
         self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         //
-        require_once ('public/jdf/jdf.php');
+        require_once('public/jdf/jdf.php');
     }
 
     function getBasket()
@@ -33,7 +33,7 @@ class Model
         foreach ($result as $key => $item) {
             $price = intval($item['gheymat']);
             $darsadTakhfif = intval($item['takhfif']);
-            $meghdarTakhfif = ($price * $darsadTakhfif)/100;
+            $meghdarTakhfif = ($price * $darsadTakhfif) / 100;
             $tedad = intval($item['tedad']);
             $meghdarTakhfifBaTedad = $meghdarTakhfif * $tedad;
             $meghdarKolleTakhfif = $meghdarKolleTakhfif + $meghdarTakhfifBaTedad;
@@ -46,11 +46,11 @@ class Model
             $priceTotal = $price * $tedad;
             $priceTotalAll += $priceTotal;
         }
-/*
-        $tedad = 0;
-        foreach ($result as $item){
-            $tedad = $tedad + $item['tedad'];
-        }*/
+        /*
+                $tedad = 0;
+                foreach ($result as $item){
+                    $tedad = $tedad + $item['tedad'];
+                }*/
         //print_r($result);
         return [$result, $priceTotalAll, $meghdarKolleTakhfif];
     }
@@ -209,4 +209,32 @@ class Model
         return $date;
     }
 
+    public static function jalaliToMiladi($jalali_date, $format = '/')
+    {
+        $jalali_date_explode = explode('/', $jalali_date);
+        $year = $jalali_date_explode[0];
+        $month = $jalali_date_explode[1];
+        $day = $jalali_date_explode[2];
+
+        $date = jalali_to_gregorian($year, $month, $day);
+        $date = implode($format, $date);
+
+        $date = new DateTime($date);
+        $date = $date->format('Y/m/d');
+
+        return $date;
+    }
+
+    public static function miladiToJalali($miladi_date, $format = '/')
+    {
+        $miladi_date_explode = explode('/', $miladi_date);
+        $year = $miladi_date_explode[0];
+        $month = $miladi_date_explode[1];
+        $day = $miladi_date_explode[2];
+
+        $date = gregorian_to_jalali($year, $month, $day);
+        $date = implode($format, $date);
+
+        return $date;
+    }
 }

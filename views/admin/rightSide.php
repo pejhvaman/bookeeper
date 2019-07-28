@@ -41,7 +41,7 @@
         <li class="menus <?php if ($active_menu == 'dashboard') {
             echo 'activeMenu';
         } ?>">
-            <a href="">
+            <a href="admindashboard/index">
                 داشبورد
             </a>
         </li>
