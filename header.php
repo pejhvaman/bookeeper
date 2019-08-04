@@ -387,7 +387,7 @@
     }
 
     #menu_level1 {
-        width: 1300px;
+        width: 95%;
         padding: 0;
         margin: auto;
         position: relative;
@@ -396,7 +396,7 @@
     #menu_level1 > li {
         float: right;
         line-height: 42px;
-        width: 115px;
+        padding: 0 10px;
         color: white;
         cursor: pointer;
         text-align: center;
@@ -422,15 +422,17 @@
     }*/
 
     .level2_content {
-        width: 1300px;
-        height: 400px;
+        padding: 15px;
         background: white;
-        margin-top: 4px;
         box-shadow: 2px 2px 5px #cbcbcb;
         position: absolute;
-        right: 0;
+        margin-right: -10px;
         display: none;
         z-index: 4;
+        margin-top: 10px;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 0  3px #c3c3c3;
     }
 
     .level2_content div:last-child {
@@ -438,7 +440,6 @@
     }
 
     .sub_content {
-        width: 311px;
         height: 100%;
         /*border-left: 1px solid #ebebeb;*/
         float: right;
@@ -463,8 +464,9 @@
 
     .menu_level2 li {
         color: #6f6f6f;
-        padding-right: 20px;
         height: 25px;
+        line-height: 25px;
+        padding: 5px 10px;
     }
 
     /*.menu_level2 li:first-child {
@@ -507,11 +509,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="sub_content"></div>
-                <div class="sub_content"></div>
-                <div class="sub_content">
-                    <img src="public/images/d2f1cd5e9bafed5e0e8218b29841b01f.jpg">
-                </div>
             </div>
 
         </li>
@@ -526,11 +523,6 @@
                         <li>آلبر کامو</li>
                         <li>ژان پل سارتر</li>
                     </ul>
-                </div>
-                <div class="sub_content"></div>
-                <div class="sub_content"></div>
-                <div class="sub_content">
-                    <img src="public/images/0f70801c7c01b5a58a0537f4007a0666.jpg">
                 </div>
             </div>
         </li>

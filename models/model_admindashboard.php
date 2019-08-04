@@ -34,11 +34,9 @@ class model_admindashboard extends Model
         $time = time();
         $last_week_time = $time - (7 * 24 * 3600);
         $last_week_date = date('Y/m/d', $last_week_time);
-
         $dates = $this->getRange($last_week_date, $today_date);
-
-
         $orders = $this->getOrders();
+
         $order_stat = [];
 
         foreach ($dates as $date) {

@@ -121,7 +121,7 @@
     }
 </style>
 <div id="filter_top">
-    <input id="search_word" type="text" placeholder="جست و جو بر اساس کلمه...">
+    <input name="key_word" id="search_word" type="text" placeholder="جست و جو بر اساس کلمه...">
     <span id="search_word_icon"></span>
     <span id="existBtn">
                 <span id="noExist"></span>
@@ -138,54 +138,26 @@
                 <span>
                     مرتب سازی بر اساس
                 </span>
-        <select>
-            <option>
-                پرفروش ترین
-            </option>
-            <option>
+        <select name="orderType1">
+            <option value="1">
                 جدید ترین
             </option>
-            <option>
+            <option value="2">
                 قیمت
             </option>
         </select>
-        <select>
-            <option>صعودی</option>
-            <option>نزولی</option>
+        <select name="orderType2">
+            <option value="1">صعودی</option>
+            <option value="2">نزولی</option>
         </select>
         <span>
-                    تعداد نمایش
-                </span>
-        <select>
-            <option>
-                24
-            </option>
-            <option>
-                36
-            </option>
-            <option>
-                48
-            </option>
+            تعداد نمایش
+        </span>
+        <select id="limit">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
         </select>
     </div>
 </div>
-<script>
-    $('#existBtn').click(function () {
-        var btn = $(this).find('#noExist');
-        if (btn.hasClass('yesExist')) {
-            btn.removeClass('yesExist');
-        } else {
-            btn.addClass('yesExist');
-        }
-    });
-    $('#row_mode').click(function () {
-        $(this).parents('#show_mode').find('#table_mode').addClass('deactiveTable');
-        $(this).addClass('activeRow');
-        $('#search_res li').addClass('liRowMode');
-    });
-    $('#table_mode').click(function () {
-        $(this).parents('#show_mode').find('#row_mode').removeClass('activeRow');
-        $(this).removeClass('deactiveTable');
-        $('#search_res li').removeClass('liRowMode');
-    });
-</script>
+

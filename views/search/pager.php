@@ -51,12 +51,16 @@
 <div id="pager">
     <span id="next_page"></span>
     <ul>
-        <li class="activePage">
-            1
-        </li>
-        <li>
-            2
-        </li>
+
     </ul>
     <span id="prev_page"></span>
 </div>
+
+<script>
+    function pager(tag, page) {
+        var liTag = $(tag);
+        $('#pager ul li').removeClass('activePage');
+        liTag.addClass('activePage');
+        doSearch(page);
+    }
+</script>

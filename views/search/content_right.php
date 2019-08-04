@@ -68,9 +68,12 @@
     .checked {
         background: #67bfb0 url(public/images/check-mark.png) no-repeat center !important;
     }
-
-
 </style>
+<?php
+$categoryInfo = $data['categoryInfo'];
+$categories = $data['categories'];
+$entesharts = $data['entesharats'];
+?>
 <div class="content_right sans">
     <div id="category_res">
         <p>
@@ -78,12 +81,7 @@
         </p>
         <ul>
             <li>
-                فلسفی
-                <ul style="padding-right: 0">
-                    <li style="padding-right: 15px">
-                        اگزیستانسیالیسم
-                    </li>
-                </ul>
+                <?php echo $categoryInfo['title'] ?>
             </li>
         </ul>
     </div>
@@ -91,22 +89,20 @@
         <p>
             بر اساس دسته بندی
         </p>
-        <ul>
-            <li>
-                <input class="real_checkbox" type="checkbox">
-                <span class="instead_check"></span>
-                فسلفی
-            </li>
-            <li>
-                <input class="real_checkbox" type="checkbox">
-                <span class="instead_check"></span>
-                هنری
-            </li>
-            <li>
-                <input class="real_checkbox" type="checkbox">
-                <span class="instead_check"></span>
-                رمان
-            </li>
+        <ul id="by_cat" data-catId="<?= $categoryInfo['id'] ?>">
+            <?php
+            foreach ($categories as $category) {
+                if ($category['id'] != $categoryInfo['id']) {
+                    ?>
+                    <li>
+                        <input name="category[]" value="<?= $category['id'] ?>" class="real_checkbox" type="checkbox">
+                        <span class="instead_check"></span>
+                        <?= $category['title'] ?>
+                    </li>
+                    <?php
+                }
+            }
+            ?>
         </ul>
     </div>
     <div class="by_cat">
@@ -114,26 +110,17 @@
             بر اساس ناشر
         </p>
         <ul>
-            <li>
-                <input class="real_checkbox" type="checkbox">
-                <span class="instead_check"></span>
-                نیلوفر
-            </li>
-            <li>
-                <input class="real_checkbox" type="checkbox">
-                <span class="instead_check"></span>
-                امیرکبیر
-            </li>
-            <li>
-                <input class="real_checkbox" type="checkbox">
-                <span class="instead_check"></span>
-                چشمه
-            </li>
-            <li>
-                <input class="real_checkbox" type="checkbox">
-                <span class="instead_check"></span>
-                ماهی
-            </li>
+            <?php
+            foreach ($entesharts as $enteshart) {
+                ?>
+                <li>
+                    <input name="ent[]" value="<?= $enteshart['id'] ?>" class="real_checkbox" type="checkbox">
+                    <span class="instead_check"></span>
+                    <?= $enteshart['nam'] ?>
+                </li>
+                <?php
+            }
+            ?>
         </ul>
     </div>
 </div>
@@ -141,9 +128,9 @@
     $('.real_checkbox').click(function () {
         if ($(this).is(':checked')) {
             $(this).parents('li').find('.instead_check').addClass('checked');
-        }
-        else {
+        } else {
             $(this).parents('li').find('.instead_check').removeClass('checked');
         }
+        doSearch();
     });
 </script>

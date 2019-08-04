@@ -1,7 +1,7 @@
 
 <style>
     #search_res {
-        width: 970px;
+        width: 94%;
         float: right;
         padding: 30px;
     }
@@ -14,12 +14,14 @@
 
     #search_res ul li {
         float: right;
-        width: 235px;
-        height: 450px;
+        width: 24%;
+        max-height: 500px;
+        overflow: hidden;
         margin-left: 5px;
         margin-bottom: 8px;
         cursor: pointer;
         border-radius: 8px;
+        padding-bottom: 20px;
     }
 
     li.liRowMode {
@@ -40,14 +42,14 @@
     }
 
     #search_res img {
-        max-width: 165px;
+        width: 165px;
         margin-top: 8px;
         border-radius: 4px;
         margin-bottom: 10px;
     }
 
     #search_res li.liRowMode img {
-        max-width: 230px !important;
+        width: 230px !important;
         float: right !important;
         margin-right: 10px !important;
         margin-top: 10px;
@@ -55,7 +57,7 @@
 
     #search_res p {
         margin: 0;
-        text-align: right;
+        text-align: center;
         width: 210px;
         padding: 0 15px 0 10px;
         float: right;
@@ -95,9 +97,6 @@
         margin-right: 20px;
     }
 
-    .tozih {
-        display: none;
-    }
 
     #search_res li.liRowMode .tozih {
         color: #6f6f6f;
@@ -131,32 +130,5 @@
 </style>
 <div id="search_res">
     <ul>
-        <li>
-            <a>
-                <img src="public/images/taun1.jpg">
-                <p class="bookname">
-                    نام کتاب
-                </p>
-                <p class="writername">
-                    نام نویسنده
-                </p>
-                <p class="nasher_num">
-                    نام ناشر - شماره چاپ
-                </p>
-                <span class="star_rating">
-                            <span class="gray_star"></span>
-                            <span class="red_star"></span>
-                        </span>
-                <p class="price">
-                    35,000
-                    تومان
-                </p>
-                <p class="tozih">
-                    توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات
-                    توضیحات توضیحات توضیحات توضیحات
-                </p>
-            </a>
-        </li>
-
     </ul>
 </div>
