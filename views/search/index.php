@@ -43,6 +43,13 @@
         } else {
             currentPage = 1;
         }
+        if (currentPage < 1) {
+            currentPage = 1;
+        }
+        var lastPageNum = $('#pager ul li:last').text();
+        if (currentPage > lastPageNum) {
+            currentPage = lastPageNum;
+        }
         var data = $('#search_form').serializeArray();
         var exist = 0;
         if ($('#noExist').hasClass('yesExist') == true) {
@@ -79,7 +86,15 @@
             var i;
             var activePage = "";
             $('#pager ul').html("");
-            for (i = 1; i <= page_num; i++) {
+            var start = currentPage - 1;
+            if (start < 1) {
+                start = 1;
+            }
+            var end = currentPage + 1;
+            if (end > page_num) {
+                end = page_num;
+            }
+            for (i = start; i <= end; i++) {
                 if (i == currentPage) {
                     activePage = "activePage";
                 } else {

@@ -62,14 +62,20 @@ class panel extends Controller
         //this is for update changes in profile info:
         $data = $_POST;
         $this->model->editProfile($data);
-        header('location:'.URL.'panel/profile');
+        header('location:' . URL . 'panel/profile');
     }
 
     function changepass()
     {
-        if(isset($_POST['current_pass'])){
+        if (isset($_POST['current_pass'])) {
             $this->model->changePass($_POST);
         }
         $this->view('panel/changepass');
+    }
+
+    function logout()
+    {
+        $this->model->logOut();
+        header('location:' . URL . 'index');
     }
 }

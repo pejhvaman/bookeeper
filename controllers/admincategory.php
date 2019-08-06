@@ -5,6 +5,11 @@ class Admincategory extends Controller
     public function __construct()
     {
         parent::__construct();
+        $model = new Model;
+        $level = $model::getUserLevel();
+        if($level != 1){
+            header('location:'.URL.'adminlogin');
+        }
     }
 
     function index()

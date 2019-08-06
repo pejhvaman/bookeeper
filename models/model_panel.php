@@ -185,4 +185,10 @@ class model_panel extends Model
 
         header('location:' . URL . 'panel/changepass?status=' . $status);
     }
+
+    function logOut()
+    {
+        @self::sessionInit();
+        unset($_SESSION['userId']);
+    }
 }

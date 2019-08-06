@@ -1,3 +1,6 @@
+<?php
+@Model::sessionInit();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,6 +61,7 @@
         margin: 0 auto;
         background: white;
     }
+
     .btn-pejhva-primary {
         display: block;
         line-height: 40px;
@@ -259,6 +263,10 @@
     }
 
 </style>
+<?php
+$userId = Model::sessionGet('userId');
+//print_r($user_id);
+?>
 <header>
     <div id="header_top">
         <div id="header_top_left">
@@ -270,29 +278,43 @@
                 </a>
             </div>
             <div class="right">
+
                 <div id="enter_site" onclick="openLoginMenu(this)">
+                    <?php
+                    if ($userId == false) {
+                    ?>
                     <span id="open_login"></span>
                     <a id="login" class="sans">ورود</a>
                     <span class="sans" style="color: #6f6f6f;font-size: 9pt">/</span>
                     <a id="register" class="sans">ثبت نام</a>
+                        <?php
+                    } else {
+                        ?>
+                        <a href="<?= URL ?>panel/logout" class="sans" style="color: #6d6d6d;margin-left: 15px">خروج</a>
+                        <a href="<?= URL ?>panel" class="sans" style="color: #6d6d6d">مشاهده پنل</a>
+                        <?php
+                    }
+                    ?>
                 </div>
-                <div id="open_login_menu">
 
+                <div id="open_login_menu">
                         <a href="<?= URL ?>login" class="btn_main" style="margin: auto;width: 180px;line-height: 42px;">
-                        ورود به پژوابوک
+                            ورود به پژوابوک
                         </a>
-                    <div style="width: 100%;margin-top: 15px;text-align: center;border-bottom: 1px solid #ebebeb;height: 42px;">
+                        <div style="width: 100%;margin-top: 15px;text-align: center;border-bottom: 1px solid #ebebeb;height: 42px;">
                         <span class="sans font_gray fontmd">
                         کاربر جدید هستید؟
                         </span>
-                        <a href="<?= URL ?>register" class="sans" style="color:#67bfb0 ;margin-right: 4px">
-                            ثبت نام
-                        </a>
-                    </div>
-                    <span id="profile_icon"></span>
-                    <a href="public//login" class="sans font_gray fontlg"
-                       style="float: right;margin-right: 8px;margin-top: 23px;">پروفایل</a>
+                            <a href="<?= URL ?>register" class="sans" style="color:#67bfb0 ;margin-right: 4px">
+                                ثبت نام
+                            </a>
+                        </div>
+                        <span id="profile_icon"></span>
+                        <a href="public//login" class="sans font_gray fontlg"
+                           style="float: right;margin-right: 8px;margin-top: 23px;">پروفایل</a>
+
                 </div>
+
             </div>
         </div>
 
@@ -422,7 +444,6 @@
     }*/
 
     .level2_content {
-        padding: 15px;
         background: white;
         box-shadow: 2px 2px 5px #cbcbcb;
         position: absolute;
@@ -432,7 +453,12 @@
         margin-top: 10px;
         border-radius: 4px;
         overflow: hidden;
-        box-shadow: 0 0  3px #c3c3c3;
+        box-shadow: 0 0 3px #c3c3c3;
+    }
+
+    .level2_content a {
+        padding: 4px 20px;
+        color: inherit;
     }
 
     .level2_content div:last-child {
@@ -474,58 +500,54 @@
         padding-right: 10px !important;
     }*/
 </style>
+<?php
+$model = new Model;
+$menus = $model->getMenus();
 
+?>
 <nav>
     <ul id="menu_level1">
-        <li data-time="1">
-            <a>
-                دسته بندی ها
-            </a>
-            <span class="border_transition"></span>
-            <div class="level2_content">
-                <div class="sub_content">
-                    <ul class="menu_level2">
-                        <li>فلسفی</li>
-                        <li>
-                            هنری و عکاسی
-                        </li>
-                        <li>
-                            تاریخی
-                        </li>
-                        <li>
-                            شعر
-                        </li>
-                        <li>
-                            بیوگرافی
-                        </li>
-                        <li>
-                            کودکان
-                        </li>
-                        <li>
-                            علمی
-                        </li>
-                        <li>
-                            نمایشنامه
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <?php
+        $i = 0;
+        foreach ($menus as $level1) {
+            ?>
+            <li data-time="<?= $level1['id'] ?>">
+                <a>
+                    <?= $level1['title'] ?>
+                </a>
+                <span class="border_transition"></span>
+                <div class="level2_content">
+                    <ul class="sub_content menu_level2">
+                        <?php
+                        if (isset($level1['subMenu'])) {
+                        $level2 = $level1['subMenu'];
+                        $i = 0;
+                        foreach ($level2
 
-        </li>
-        <li data-time="3">
-            <a>
-                نویسندگان
-            </a>
-            <div class="level2_content">
-                <div class="sub_content">
-                    <ul class="menu_level2">
-                        <li>کافکا</li>
-                        <li>آلبر کامو</li>
-                        <li>ژان پل سارتر</li>
+                        as $item) {
+                        if ($i % 5 == 0) {
+                        ?>
+                    </ul>
+                    <ul class="sub_content menu_level2">
+                        <?php
+                        }
+                        ?>
+                        <li>
+                            <a href="#">
+                                <?= $item['title'] ?>
+                            </a>
+                        </li>
+                        <?php
+                        $i++;
+                        }
+                        }
+                        ?>
                     </ul>
                 </div>
-            </div>
-        </li>
+            </li>
+            <?php
+        }
+        ?>
     </ul>
 </nav>
 <script>

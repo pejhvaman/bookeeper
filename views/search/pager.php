@@ -1,4 +1,3 @@
-
 <style>
     #pager {
         width: 100%;
@@ -49,11 +48,11 @@
     }
 </style>
 <div id="pager">
-    <span id="next_page"></span>
+    <span id="next_page" onclick="doSearch(currentPage+1)"></span>
     <ul>
-
+        <li>1</li>
     </ul>
-    <span id="prev_page"></span>
+    <span id="prev_page" onclick="doSearch(currentPage-1)"></span>
 </div>
 
 <script>

@@ -1,4 +1,5 @@
 <?php
+$active_menu = 'product';
 require('views/admin/rightSide.php');
 ?>
 <script src="public/ckeditor/ckeditor.js"></script>

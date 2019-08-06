@@ -5,6 +5,11 @@ class adminorder extends Controller
     public function __construct()
     {
         parent::__construct();
+        $model = new Model;
+        $level = $model::getUserLevel();
+        if($level != 1 and $level != 2){
+            header('location:'.URL.'adminlogin');
+        }
     }
 
     function index()

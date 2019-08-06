@@ -36,6 +36,10 @@
         color: whitesmoke;
     }
 </style>
+<?php
+$model = new Model;
+$level = $model::getUserLevel();
+?>
 <div class="rightSide sans">
     <ul class="menuList">
         <li class="menus <?php if ($active_menu == 'dashboard') {
@@ -45,13 +49,19 @@
                 داشبورد
             </a>
         </li>
-        <li class="menus <?php if ($active_menu == 'category') {
-            echo 'activeMenu';
-        } ?>">
-            <a href="admincategory/index">
-                مدیریت دسته ها
-            </a>
-        </li>
+        <?php
+        if($level == 1) {
+            ?>
+            <li class="menus <?php if ($active_menu == 'category') {
+                echo 'activeMenu';
+            } ?>">
+                <a href="admincategory/index">
+                    مدیریت دسته ها
+                </a>
+            </li>
+            <?php
+        }
+        ?>
         <li class="menus <?php if ($active_menu == 'product') {
             echo 'activeMenu';
         } ?>">
@@ -80,11 +90,31 @@
                 مدیریت نظرات
             </a>
         </li>
-        <li class="menus <?php if ($active_menu == 'setting') {
+        <?php
+        if($level == 1) {
+            ?>
+            <li class="menus <?php if ($active_menu == 'setting') {
+                echo 'activeMenu';
+            } ?>">
+                <a href="adminsetting/index">
+                    مدیریت تنظیمات
+                </a>
+            </li>
+            <?php
+        }
+        ?>
+        <li class="menus <?php if ($active_menu == 'slider1') {
             echo 'activeMenu';
         } ?>">
-            <a href="adminsetting/index">
-                مدیریت تنظیمات
+            <a href="adminslider/index">
+                مدیریت اسلایدر اول
+            </a>
+        </li>
+        <li class="menus <?php if ($active_menu == 'user') {
+            echo 'activeMenu';
+        } ?>">
+            <a href="adminuser/index">
+                مدیریت اعضا
             </a>
         </li>
     </ul>

@@ -237,4 +237,30 @@ class Model
 
         return $date;
     }
+
+    function getMenus($idparent = 0)
+    {
+        $sql = "select * from tbl_category where valed=?";
+        $result = $this->doSelect($sql, [$idparent]);
+
+        foreach ($result as $menu) {
+            $sub_menu = $this->getMenus($menu['id']);
+            if (sizeof([$sub_menu]) > 0) {
+                $menu['subMenu'] = $sub_menu;
+            }
+
+            @$data[] = $menu;
+        }
+
+        return @$data;
+    }
+
+    public static function getUserLevel()
+    {
+        @self::sessionInit();
+        $user_id = self::sessionGet('userId');
+        $sql = "select * from tbl_users where id=?";
+        $res = self::doSelect($sql, [$user_id], 1);
+        return $res['sath'];
+    }
 }
