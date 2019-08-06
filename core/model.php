@@ -7,9 +7,9 @@ class Model
     function __construct()
     {
         $servername = 'localhost';
-        $username = 'root';
-        $password = '';
-        $dbname = 'pejhvabook';
+        $username = 'pejhvama_pezhman';
+        $password = 'pejhman1540418642';
+        $dbname = 'pejhvama_pejhvabook';
         $utfArray = [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES "utf8"'];
         self::$conn = new PDO('mysql:host=' . $servername . ';dbname=' . $dbname, $username, $password, $utfArray);
         self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
