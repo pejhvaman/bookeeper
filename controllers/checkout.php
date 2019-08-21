@@ -7,14 +7,14 @@ class checkout extends Controller
 
     }
 
-    function index($order_id)
+    function index($order_id='')
     {
         if (isset($_GET['Authority'])) {
             //var_dump($_GET);
             $result = $this->model->checkoutZarinpal($_GET);
             $data = ['orderInfo' => $result];
         }
-        if (isset($order_id)) {
+        if ($order_id!='') {
             $order_info = $this->model->getOrderInfo($order_id);
             $data = ['orderInfo' => $order_info];
         }

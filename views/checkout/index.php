@@ -245,7 +245,9 @@ $basket = unserialize($basket);
 
 $vaziat_pardakht = $orderInfo['vaziat_pardakht'];
 $sabt_time = $orderInfo['sabt_time'];
-$sabt_time = intval($sabt_time);
+//$sabt_time = intval($sabt_time);
+$sabt_time = Model::jalaliToMiladi();
+$sabt_time = time($sabt_time);
 $gozashte = time() - $sabt_time;
 $mohalt = mohlate_pardakht * 3600;
 

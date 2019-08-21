@@ -141,20 +141,24 @@
                                 </td>
                             </tr>
                             <?php
-                            $sabad = $code['order_info']['sabad'];
-                            $sabad = unserialize($sabad);
+                            if(isset($code['order_info']['sabad'])) {
+                                $sabad = $code['order_info']['sabad'];
+                                $sabad = unserialize($sabad);
 
-                            foreach ($sabad as $item) {
-                                ?>
-                                <tr>
-                                    <td>
-                                        <?= $item['esm'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $code['order_info']['sabt_time_sh'] ?>
-                                    </td>
-                                </tr>
-                                <?php
+                                foreach ($sabad as $item) {
+                                    ?>
+                                    }
+
+                                    <tr>
+                                        <td>
+                                            <?= $item['esm'] ?>
+                                        </td>
+                                        <td>
+                                            <?= $code['order_info']['sabt_time_sh'] ?>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
                             }
                             ?>
                         </table>

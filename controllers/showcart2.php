@@ -21,11 +21,18 @@ class showcart2 extends Controller
         }else{
             $code = '';
         }*/
-        $response = $this->model->checkCode($code);
+        if($code==''){
+            $response = $this->model->checkCode($code);
+            echo $response;
+        }else {
+            $response = 0;
+            echo $response;
+        }
+
 
         //$final_price = $this->model->calculateFinalPrice($code);
 
-        echo $response;
+
         //var_dump($response);
     }
 

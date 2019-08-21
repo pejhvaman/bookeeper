@@ -235,13 +235,15 @@ $address = $data['address'];
         }, 'json');
     }
 
+    $('#sabad table').eq(0).find('.select_but').addClass('activeAddress');
+
     $('#sabad .select_but').click(function () {
         //$(this).toggleClass('activeAddress');
         $('#sabad .select_but').removeClass('activeAddress');
         $(this).addClass('activeAddress');
         chosenAddress();
     });
-    $('#sabad table').eq(0).find('.select_but').addClass('activeAddress');
+
 
     function chosenAddress() {
         var activeButton = $('#sabad .select_but.activeAddress');
@@ -253,4 +255,5 @@ $address = $data['address'];
             console.log(msg);
         });
     }
+    chosenAddress();
 </script>
